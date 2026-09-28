@@ -179,7 +179,12 @@ const html = `<!DOCTYPE html>
   #today-card { border: 2px solid #7a1f2b; background: #fff8ef; border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
   #today-card.feast { border-color: #c9971b; background: #fff8e2; }
   #today-card.fast { border-color: #5b7c99; background: #eef4f8; }
-  #today-card h2 { margin-top: 0; border: none; padding-bottom: 0; font-size: 1.1rem; color: #7a1f2b; text-transform: uppercase; letter-spacing: 0.03em; }
+  .today-nav { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  #today-card h2 { margin: 0; border: none; padding-bottom: 0; font-size: 1.1rem; color: #7a1f2b; text-transform: uppercase; letter-spacing: 0.03em; }
+  .nav-arrow { background: #7a1f2b; color: #fff; border: none; border-radius: 50%; width: 2rem; height: 2rem; font-size: 1.1rem; line-height: 1; cursor: pointer; flex: none; }
+  .nav-arrow:hover:not(:disabled) { background: #5c1620; }
+  .nav-arrow:disabled { background: #c9b8bc; cursor: default; }
+  .back-link { display: inline-block; margin-top: 0.5rem; font-size: 0.85rem; }
   #today-card .date { font-size: 1.4rem; }
   #today-card .body { font-size: 1.1rem; margin-top: 0.4rem; }
   input[type=search] { width: 100%; padding: 0.5rem; margin-bottom: 1rem; font-size: 1rem; box-sizing: border-box; }
@@ -208,8 +213,13 @@ const html = `<!DOCTYPE html>
 <h1>📖 Armenian Apostolic Daily Bible Readings (2026)</h1>
 
 <div id="today-card">
-  <h2>Today's Reading</h2>
+  <div class="today-nav">
+    <button id="prev-day" class="nav-arrow" type="button" aria-label="Previous day">&larr;</button>
+    <h2 id="today-heading">Today's Reading</h2>
+    <button id="next-day" class="nav-arrow" type="button" aria-label="Next day">&rarr;</button>
+  </div>
   <div id="today-body">Loading...</div>
+  <a href="#" id="back-to-today" class="back-link" style="display:none;">&uarr; Back to Today</a>
 </div>
 
 <p class="summary">Daily Scripture readings for 2026 following the Armenian Apostolic Church's liturgical calendar, compiled by AREC (Western Prelacy).</p>
@@ -228,6 +238,7 @@ ${renderCalendarDays()}
 
 <script>
   var CALENDAR = ${CALENDAR_JSON};
+  var MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   function todayStr() {
     var d = new Date();
@@ -236,35 +247,71 @@ ${renderCalendarDays()}
     return { full: d.getFullYear() + '-' + mm + '-' + dd, monthDay: mm + '-' + dd };
   }
 
-  function renderToday() {
+  function findTodayIndex() {
     var today = todayStr();
-    var entry = CALENDAR.find(function (d) { return d.date === today.full; });
-    if (!entry) {
-      entry = CALENDAR.find(function (d) { return d.date.slice(5) === today.monthDay; });
-    }
+    var idx = CALENDAR.findIndex(function (d) { return d.date === today.full; });
+    if (idx === -1) idx = CALENDAR.findIndex(function (d) { return d.date.slice(5) === today.monthDay; });
+    return idx;
+  }
+
+  var todayIndex = findTodayIndex();
+  var viewedIndex = todayIndex === -1 ? 0 : todayIndex;
+
+  function renderCard(index) {
+    if (index < 0) index = 0;
+    if (index > CALENDAR.length - 1) index = CALENDAR.length - 1;
+    viewedIndex = index;
+    var entry = CALENDAR[index];
     var card = document.getElementById('today-card');
     var body = document.getElementById('today-body');
+    var heading = document.getElementById('today-heading');
+    var backLink = document.getElementById('back-to-today');
     if (!entry) {
-      body.innerHTML = '<span class="unresolved">No reading found for today - browse the full list below.</span>';
+      body.innerHTML = '<span class="unresolved">No reading found - browse the full list below.</span>';
       return;
     }
     body.innerHTML = entry.html;
     card.classList.toggle('feast', !!entry.feast);
     card.classList.toggle('fast', !!entry.fast);
+    document.querySelectorAll('#plan-list li.is-today').forEach(function (li) { li.classList.remove('is-today'); });
     var li = document.querySelector('#plan-list li[data-date="' + entry.date + '"]');
     if (li) li.classList.add('is-today');
+    if (index === todayIndex) {
+      heading.textContent = "Today's Reading";
+      backLink.style.display = 'none';
+    } else {
+      heading.textContent = entry.dateLabel;
+      backLink.style.display = '';
+    }
+    document.getElementById('prev-day').disabled = index <= 0;
+    document.getElementById('next-day').disabled = index >= CALENDAR.length - 1;
   }
 
-  renderToday();
+  renderCard(viewedIndex);
+
+  document.getElementById('prev-day').addEventListener('click', function () { renderCard(viewedIndex - 1); });
+  document.getElementById('next-day').addEventListener('click', function () { renderCard(viewedIndex + 1); });
+  document.getElementById('back-to-today').addEventListener('click', function (e) {
+    e.preventDefault();
+    renderCard(todayIndex === -1 ? 0 : todayIndex);
+  });
 
   var input = document.querySelector('input.filter');
   var list = document.getElementById('plan-list');
-  input.addEventListener('input', function () {
-    var q = input.value.toLowerCase();
+
+  function applyFilter(q) {
     list.querySelectorAll('li').forEach(function (li) {
       li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
     });
-  });
+  }
+
+  input.addEventListener('input', function () { applyFilter(input.value.toLowerCase()); });
+
+  // Default the filter to the current month so the visible list is relevant right away,
+  // instead of always starting at January 1st. Users can clear it to see the full year.
+  var currentMonthName = MONTH_NAMES[new Date().getMonth()];
+  input.value = currentMonthName;
+  applyFilter(currentMonthName.toLowerCase());
 </script>
 </body>
 </html>
