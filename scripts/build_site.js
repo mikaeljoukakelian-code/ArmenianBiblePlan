@@ -27,6 +27,24 @@ const DEUTERO_BOOKS = new Set([
   "Tobit", "Judith", "Wisdom", "Sirach", "Baruch", "1 Maccabees", "2 Maccabees",
 ]);
 
+const WEEKDAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+// Computes the weekday name for a Y/M/D via UTC construction (avoids local-timezone off-by-one).
+function weekdayName(year, month, day) {
+  return WEEKDAY_NAMES[new Date(Date.UTC(year, month - 1, day)).getUTCDay()];
+}
+
+// Lightweight keyword-based classification for visually highlighting fasting days and major feast
+// days in the lectionary title. Not a canonical liturgical authority - just a helpful visual cue.
+const FAST_RE = /\bfast\b|median day of great lent|first day of lent/i;
+const FEAST_RE = /\bfeast\b|nativity|christmas|epiphany|\beaster\b|pentecost|\bascension\b|transfiguration|assumption|exaltation of the holy cross|annunciation|\bpresentation\b|palm sunday|vartavar|discovery of the holy cross|apparition of the holy cross/i;
+function classifyDay(title) {
+  if (!title) return { fast: false, feast: false };
+  const fast = FAST_RE.test(title);
+  const feast = !fast && FEAST_RE.test(title);
+  return { fast, feast };
+}
+
 // Parses a reference string like "Isaiah 51:15-52:3" into { book, chapter } using the START chapter,
 // for building a bible.com chapter-level deep link.
 function parseReference(ref) {
@@ -66,11 +84,14 @@ function buildRefLinks(ref) {
 // for server-rendered HTML and as an embedded JSON blob the client script uses to find "today".
 const CALENDAR_DAYS = ARM_PLAN.calendar.map((d) => {
   const dateStr = `${d.year}-${String(d.month).padStart(2, "0")}-${String(d.day).padStart(2, "0")}`;
+  const { fast, feast } = classifyDay(d.title);
   return {
     date: dateStr,
-    dateLabel: `${d.monthName} ${d.day}`,
+    dateLabel: `${weekdayName(d.year, d.month, d.day)}, ${d.monthName} ${d.day}`,
     title: d.title || "",
     noReadings: !!d.noReadings,
+    fast,
+    feast,
     refs: d.noReadings ? [] : d.references.map(buildRefLinks),
   };
 });
@@ -83,15 +104,20 @@ function renderRefHtml(r) {
 }
 
 function renderDayInner(d) {
+  const badge = d.fast ? '<span class="badge fast-badge">Fast</span> ' : (d.feast ? '<span class="badge feast-badge">Feast</span> ' : "");
   const title = d.title ? `<span class="tag">${escapeHtml(d.title)}</span> ` : "";
   const body = d.noReadings
     ? `<span class="no-readings">No readings appointed</span>`
     : d.refs.map(renderRefHtml).join(", ");
-  return `<span class="date">${escapeHtml(d.dateLabel)}</span> ${title}${body}`;
+  return `<span class="date">${escapeHtml(d.dateLabel)}</span> ${badge}${title}${body}`;
 }
 
 function renderCalendarDays() {
-  return CALENDAR_DAYS.map((d) => `<li data-date="${d.date}">${renderDayInner(d)}</li>`).join("\n");
+  return CALENDAR_DAYS.map((d) => {
+    const cls = [d.fast ? "fast" : "", d.feast ? "feast" : ""].filter(Boolean).join(" ");
+    const classAttr = cls ? ` class="${cls}"` : "";
+    return `<li data-date="${d.date}"${classAttr}>${renderDayInner(d)}</li>`;
+  }).join("\n");
 }
 
 const CALENDAR_JSON = JSON.stringify(CALENDAR_DAYS.map((d) => ({
@@ -99,8 +125,17 @@ const CALENDAR_JSON = JSON.stringify(CALENDAR_DAYS.map((d) => ({
   dateLabel: d.dateLabel,
   title: d.title,
   noReadings: d.noReadings,
+  fast: d.fast,
+  feast: d.feast,
   html: renderDayInner(d),
 })));
+
+// Copy the cropped background photo (left side of the Sevan peninsula panorama) into site/ so the
+// static page can reference it with a plain relative path.
+const bgSrc = path.join(__dirname, "..", "data", "sevan_left.jpg");
+const bgFileName = "sevan_left.jpg";
+fs.mkdirSync(path.join(__dirname, "..", "site"), { recursive: true });
+fs.copyFileSync(bgSrc, path.join(__dirname, "..", "site", bgFileName));
 
 const html = `<!DOCTYPE html>
 <html lang="en">
@@ -109,22 +144,35 @@ const html = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Armenian Apostolic Daily Bible Readings - 2026</title>
 <style>
-  body { font-family: Georgia, 'Times New Roman', serif; max-width: 900px; margin: 0 auto; padding: 1.5rem; line-height: 1.5; color: #222; background: #fdfaf5; }
-  h1 { font-size: 1.6rem; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif; line-height: 1.5; color: #222;
+    background: #0e2a1e url('${bgFileName}') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0; padding: 1.5rem 0 3rem;
+  }
+  .page { max-width: 900px; margin: 0 auto; background: rgba(253, 250, 245, 0.93); border-radius: 12px; padding: 1.5rem 1.75rem; box-shadow: 0 4px 24px rgba(0,0,0,0.35); }
+  h1 { font-size: 1.6rem; margin-top: 0; }
   h2 { border-bottom: 2px solid #7a1f2b; padding-bottom: 0.3rem; margin-top: 1.5rem; }
   .desc { color: #444; margin-bottom: 1rem; }
   .attribution { font-size: 0.85rem; color: #666; margin-bottom: 1.5rem; }
   #today-card { border: 2px solid #7a1f2b; background: #fff8ef; border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
+  #today-card.feast { border-color: #c9971b; background: #fff8e2; }
+  #today-card.fast { border-color: #5b7c99; background: #eef4f8; }
   #today-card h2 { margin-top: 0; border: none; padding-bottom: 0; font-size: 1.1rem; color: #7a1f2b; text-transform: uppercase; letter-spacing: 0.03em; }
   #today-card .date { font-size: 1.4rem; }
   #today-card .body { font-size: 1.1rem; margin-top: 0.4rem; }
   input[type=search] { width: 100%; padding: 0.5rem; margin-bottom: 1rem; font-size: 1rem; box-sizing: border-box; }
   ul.plan { list-style: none; padding: 0; margin: 0; }
-  ul.plan li { padding: 0.4rem 0.2rem; border-bottom: 1px solid #e5ddd0; }
+  ul.plan li { padding: 0.4rem 0.5rem; border-bottom: 1px solid #e5ddd0; border-left: 4px solid transparent; }
   ul.plan li:hover { background: #f5eee0; }
-  ul.plan li.is-today { background: #fef1d8; }
-  .date { font-weight: bold; color: #7a1f2b; display: inline-block; min-width: 6rem; }
+  ul.plan li.feast { background: #fff8e2; border-left-color: #c9971b; }
+  ul.plan li.fast { background: #eef4f8; border-left-color: #5b7c99; }
+  ul.plan li.is-today { outline: 2px solid #7a1f2b; outline-offset: -2px; }
+  .date { font-weight: bold; color: #7a1f2b; display: inline-block; min-width: 9rem; }
   .tag { font-style: italic; color: #555; }
+  .badge { font-size: 0.7rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.03em; border-radius: 3px; padding: 0.1rem 0.4rem; margin-right: 0.3rem; display: inline-block; }
+  .feast-badge { background: #c9971b; color: #fff; }
+  .fast-badge { background: #5b7c99; color: #fff; }
   a { color: #1a5276; text-decoration: none; }
   a:hover { text-decoration: underline; }
   a.en-link { font-size: 0.8rem; color: #7a1f2b; border: 1px solid #7a1f2b; border-radius: 4px; padding: 0 0.3rem; text-decoration: none; }
@@ -133,21 +181,24 @@ const html = `<!DOCTYPE html>
 </style>
 </head>
 <body>
+<div class="page">
 <h1>📖 Armenian Apostolic Daily Bible Readings (2026)</h1>
-<p class="desc" lang="hy">${escapeHtml(ARM_PLAN.meta.nameHy)}</p>
-<p class="desc">${escapeHtml(ARM_PLAN.meta.descriptionEn)}</p>
-<p class="attribution">${escapeHtml(ARM_PLAN.meta.attributionEn)}</p>
-<p class="attribution">Armenian links use the Western Armenian Bible (WARMB, bible.com version ${ARMENIAN_OT_VERSION_ID}) for Old Testament readings and the Western Armenian New Translation (WANTACOC, version ${ARMENIAN_NT_VERSION_ID}) for New Testament readings. English "EN" links use the NKJV (version ${ENGLISH_VERSION_ID}). A few readings cite deuterocanonical books (Tobit, Judith, Wisdom, Sirach, Baruch, 1-2 Maccabees, marked &dagger;) that aren't included in WARMB, WANTACOC, or the NKJV - those links fall back to the ՆԷԱ (New Ejmiatsin) Armenian Bible, and no English link is shown.</p>
 
 <div id="today-card">
   <h2>Today's Reading</h2>
   <div id="today-body">Loading...</div>
 </div>
 
+<p class="desc" lang="hy">${escapeHtml(ARM_PLAN.meta.nameHy)}</p>
+<p class="desc">${escapeHtml(ARM_PLAN.meta.descriptionEn)}</p>
+<p class="attribution">${escapeHtml(ARM_PLAN.meta.attributionEn)}</p>
+<p class="attribution">Armenian links use the Western Armenian Bible (WARMB, bible.com version ${ARMENIAN_OT_VERSION_ID}) for Old Testament readings and the Western Armenian New Translation (WANTACOC, version ${ARMENIAN_NT_VERSION_ID}) for New Testament readings. English "EN" links use the NKJV (version ${ENGLISH_VERSION_ID}). A few readings cite deuterocanonical books (Tobit, Judith, Wisdom, Sirach, Baruch, 1-2 Maccabees, marked &dagger;) that aren't included in WARMB, WANTACOC, or the NKJV - those links fall back to the ՆԷԱ (New Ejmiatsin) Armenian Bible, and no English link is shown. <span class="badge feast-badge">Feast</span> and <span class="badge fast-badge">Fast</span> days are highlighted below.</p>
+
 <input type="search" class="filter" placeholder="Search by date, feast, or book (e.g. 'January 1' or 'Isaiah')...">
 <ul class="plan" id="plan-list">
 ${renderCalendarDays()}
 </ul>
+</div>
 
 <script>
   var CALENDAR = ${CALENDAR_JSON};
@@ -165,12 +216,15 @@ ${renderCalendarDays()}
     if (!entry) {
       entry = CALENDAR.find(function (d) { return d.date.slice(5) === today.monthDay; });
     }
+    var card = document.getElementById('today-card');
     var body = document.getElementById('today-body');
     if (!entry) {
       body.innerHTML = '<span class="unresolved">No reading found for today - browse the full list below.</span>';
       return;
     }
     body.innerHTML = entry.html;
+    card.classList.toggle('feast', !!entry.feast);
+    card.classList.toggle('fast', !!entry.fast);
     var li = document.querySelector('#plan-list li[data-date="' + entry.date + '"]');
     if (li) li.classList.add('is-today');
   }
