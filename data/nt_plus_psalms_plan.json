@@ -1,0 +1,2950 @@
+{
+  "meta": {
+    "nameEn": "New Testament in a Year (with Psalms & Proverbs)",
+    "descriptionEn": "Read through the entire New Testament in canonical order over 365 days, one chapter on each weekday. On weekend reflection days, pause with a Psalm or a chapter of Proverbs to meditate on what you've read.",
+    "lengthDays": 365,
+    "categories": [
+      "Bible Reading Plans",
+      "New Testament",
+      "Devotional"
+    ],
+    "keywords": [
+      "new testament",
+      "one year",
+      "psalms",
+      "proverbs",
+      "daily reading"
+    ],
+    "recommendedVersions": {
+      "english": "NKJV or ESV"
+    }
+  },
+  "stats": {
+    "ntChaptersUsed": 260,
+    "psalmsUsed": 74,
+    "proverbsUsed": 31,
+    "totalDays": 365
+  },
+  "days": [
+    {
+      "day": 1,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 1,
+      "reference": "Matthew 1",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 2,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 2,
+      "reference": "Matthew 2",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 3,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 3,
+      "reference": "Matthew 3",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 4,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 4,
+      "reference": "Matthew 4",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 5,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 5,
+      "reference": "Matthew 5",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 6,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 1,
+      "reference": "Psalms 1",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 7,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 1,
+      "reference": "Proverbs 1",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 8,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 6,
+      "reference": "Matthew 6",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 9,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 7,
+      "reference": "Matthew 7",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 10,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 8,
+      "reference": "Matthew 8",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 11,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 9,
+      "reference": "Matthew 9",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 12,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 10,
+      "reference": "Matthew 10",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 13,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 2,
+      "reference": "Psalms 2",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 14,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 2,
+      "reference": "Proverbs 2",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 15,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 11,
+      "reference": "Matthew 11",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 16,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 12,
+      "reference": "Matthew 12",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 17,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 13,
+      "reference": "Matthew 13",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 18,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 14,
+      "reference": "Matthew 14",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 19,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 15,
+      "reference": "Matthew 15",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 20,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 3,
+      "reference": "Psalms 3",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 21,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 3,
+      "reference": "Proverbs 3",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 22,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 16,
+      "reference": "Matthew 16",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 23,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 17,
+      "reference": "Matthew 17",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 24,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 18,
+      "reference": "Matthew 18",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 25,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 19,
+      "reference": "Matthew 19",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 26,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 20,
+      "reference": "Matthew 20",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 27,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 4,
+      "reference": "Psalms 4",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 28,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 4,
+      "reference": "Proverbs 4",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 29,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 21,
+      "reference": "Matthew 21",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 30,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 22,
+      "reference": "Matthew 22",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 31,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 23,
+      "reference": "Matthew 23",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 32,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 24,
+      "reference": "Matthew 24",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 33,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 25,
+      "reference": "Matthew 25",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 34,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 5,
+      "reference": "Psalms 5",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 35,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 5,
+      "reference": "Proverbs 5",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 36,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 26,
+      "reference": "Matthew 26",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 37,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 27,
+      "reference": "Matthew 27",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 38,
+      "type": "New Testament",
+      "book": "Matthew",
+      "chapter": 28,
+      "reference": "Matthew 28",
+      "bookCode": "MAT"
+    },
+    {
+      "day": 39,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 1,
+      "reference": "Mark 1",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 40,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 2,
+      "reference": "Mark 2",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 41,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 6,
+      "reference": "Psalms 6",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 42,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 6,
+      "reference": "Proverbs 6",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 43,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 3,
+      "reference": "Mark 3",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 44,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 4,
+      "reference": "Mark 4",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 45,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 5,
+      "reference": "Mark 5",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 46,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 6,
+      "reference": "Mark 6",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 47,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 7,
+      "reference": "Mark 7",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 48,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 7,
+      "reference": "Psalms 7",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 49,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 7,
+      "reference": "Proverbs 7",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 50,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 8,
+      "reference": "Mark 8",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 51,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 9,
+      "reference": "Mark 9",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 52,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 10,
+      "reference": "Mark 10",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 53,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 11,
+      "reference": "Mark 11",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 54,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 12,
+      "reference": "Mark 12",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 55,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 8,
+      "reference": "Psalms 8",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 56,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 8,
+      "reference": "Proverbs 8",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 57,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 13,
+      "reference": "Mark 13",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 58,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 14,
+      "reference": "Mark 14",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 59,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 15,
+      "reference": "Mark 15",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 60,
+      "type": "New Testament",
+      "book": "Mark",
+      "chapter": 16,
+      "reference": "Mark 16",
+      "bookCode": "MRK"
+    },
+    {
+      "day": 61,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 1,
+      "reference": "Luke 1",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 62,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 9,
+      "reference": "Psalms 9",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 63,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 9,
+      "reference": "Proverbs 9",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 64,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 2,
+      "reference": "Luke 2",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 65,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 3,
+      "reference": "Luke 3",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 66,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 4,
+      "reference": "Luke 4",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 67,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 5,
+      "reference": "Luke 5",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 68,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 6,
+      "reference": "Luke 6",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 69,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 10,
+      "reference": "Psalms 10",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 70,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 10,
+      "reference": "Proverbs 10",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 71,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 7,
+      "reference": "Luke 7",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 72,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 8,
+      "reference": "Luke 8",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 73,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 9,
+      "reference": "Luke 9",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 74,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 10,
+      "reference": "Luke 10",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 75,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 11,
+      "reference": "Luke 11",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 76,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 11,
+      "reference": "Psalms 11",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 77,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 11,
+      "reference": "Proverbs 11",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 78,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 12,
+      "reference": "Luke 12",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 79,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 13,
+      "reference": "Luke 13",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 80,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 14,
+      "reference": "Luke 14",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 81,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 15,
+      "reference": "Luke 15",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 82,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 16,
+      "reference": "Luke 16",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 83,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 12,
+      "reference": "Psalms 12",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 84,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 12,
+      "reference": "Proverbs 12",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 85,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 17,
+      "reference": "Luke 17",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 86,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 18,
+      "reference": "Luke 18",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 87,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 19,
+      "reference": "Luke 19",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 88,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 20,
+      "reference": "Luke 20",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 89,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 21,
+      "reference": "Luke 21",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 90,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 13,
+      "reference": "Psalms 13",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 91,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 13,
+      "reference": "Proverbs 13",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 92,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 22,
+      "reference": "Luke 22",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 93,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 23,
+      "reference": "Luke 23",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 94,
+      "type": "New Testament",
+      "book": "Luke",
+      "chapter": 24,
+      "reference": "Luke 24",
+      "bookCode": "LUK"
+    },
+    {
+      "day": 95,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 1,
+      "reference": "John 1",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 96,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 2,
+      "reference": "John 2",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 97,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 14,
+      "reference": "Psalms 14",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 98,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 14,
+      "reference": "Proverbs 14",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 99,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 3,
+      "reference": "John 3",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 100,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 4,
+      "reference": "John 4",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 101,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 5,
+      "reference": "John 5",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 102,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 6,
+      "reference": "John 6",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 103,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 7,
+      "reference": "John 7",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 104,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 15,
+      "reference": "Psalms 15",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 105,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 15,
+      "reference": "Proverbs 15",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 106,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 8,
+      "reference": "John 8",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 107,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 9,
+      "reference": "John 9",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 108,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 10,
+      "reference": "John 10",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 109,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 11,
+      "reference": "John 11",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 110,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 12,
+      "reference": "John 12",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 111,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 16,
+      "reference": "Psalms 16",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 112,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 16,
+      "reference": "Proverbs 16",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 113,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 13,
+      "reference": "John 13",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 114,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 14,
+      "reference": "John 14",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 115,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 15,
+      "reference": "John 15",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 116,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 16,
+      "reference": "John 16",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 117,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 17,
+      "reference": "John 17",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 118,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 17,
+      "reference": "Psalms 17",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 119,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 17,
+      "reference": "Proverbs 17",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 120,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 18,
+      "reference": "John 18",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 121,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 19,
+      "reference": "John 19",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 122,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 20,
+      "reference": "John 20",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 123,
+      "type": "New Testament",
+      "book": "John",
+      "chapter": 21,
+      "reference": "John 21",
+      "bookCode": "JHN"
+    },
+    {
+      "day": 124,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 1,
+      "reference": "Acts 1",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 125,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 18,
+      "reference": "Psalms 18",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 126,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 18,
+      "reference": "Proverbs 18",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 127,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 2,
+      "reference": "Acts 2",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 128,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 3,
+      "reference": "Acts 3",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 129,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 4,
+      "reference": "Acts 4",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 130,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 5,
+      "reference": "Acts 5",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 131,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 6,
+      "reference": "Acts 6",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 132,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 19,
+      "reference": "Psalms 19",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 133,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 19,
+      "reference": "Proverbs 19",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 134,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 7,
+      "reference": "Acts 7",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 135,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 8,
+      "reference": "Acts 8",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 136,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 9,
+      "reference": "Acts 9",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 137,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 10,
+      "reference": "Acts 10",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 138,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 11,
+      "reference": "Acts 11",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 139,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 20,
+      "reference": "Psalms 20",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 140,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 20,
+      "reference": "Proverbs 20",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 141,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 12,
+      "reference": "Acts 12",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 142,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 13,
+      "reference": "Acts 13",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 143,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 14,
+      "reference": "Acts 14",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 144,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 15,
+      "reference": "Acts 15",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 145,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 16,
+      "reference": "Acts 16",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 146,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 21,
+      "reference": "Psalms 21",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 147,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 21,
+      "reference": "Proverbs 21",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 148,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 17,
+      "reference": "Acts 17",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 149,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 18,
+      "reference": "Acts 18",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 150,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 19,
+      "reference": "Acts 19",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 151,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 20,
+      "reference": "Acts 20",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 152,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 21,
+      "reference": "Acts 21",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 153,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 22,
+      "reference": "Psalms 22",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 154,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 22,
+      "reference": "Proverbs 22",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 155,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 22,
+      "reference": "Acts 22",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 156,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 23,
+      "reference": "Acts 23",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 157,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 24,
+      "reference": "Acts 24",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 158,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 25,
+      "reference": "Acts 25",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 159,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 26,
+      "reference": "Acts 26",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 160,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 23,
+      "reference": "Psalms 23",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 161,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 23,
+      "reference": "Proverbs 23",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 162,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 27,
+      "reference": "Acts 27",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 163,
+      "type": "New Testament",
+      "book": "Acts",
+      "chapter": 28,
+      "reference": "Acts 28",
+      "bookCode": "ACT"
+    },
+    {
+      "day": 164,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 1,
+      "reference": "Romans 1",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 165,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 2,
+      "reference": "Romans 2",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 166,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 3,
+      "reference": "Romans 3",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 167,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 24,
+      "reference": "Psalms 24",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 168,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 24,
+      "reference": "Proverbs 24",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 169,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 4,
+      "reference": "Romans 4",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 170,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 5,
+      "reference": "Romans 5",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 171,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 6,
+      "reference": "Romans 6",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 172,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 7,
+      "reference": "Romans 7",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 173,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 8,
+      "reference": "Romans 8",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 174,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 25,
+      "reference": "Psalms 25",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 175,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 25,
+      "reference": "Proverbs 25",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 176,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 9,
+      "reference": "Romans 9",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 177,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 10,
+      "reference": "Romans 10",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 178,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 11,
+      "reference": "Romans 11",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 179,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 12,
+      "reference": "Romans 12",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 180,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 13,
+      "reference": "Romans 13",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 181,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 26,
+      "reference": "Psalms 26",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 182,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 26,
+      "reference": "Proverbs 26",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 183,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 14,
+      "reference": "Romans 14",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 184,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 15,
+      "reference": "Romans 15",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 185,
+      "type": "New Testament",
+      "book": "Romans",
+      "chapter": 16,
+      "reference": "Romans 16",
+      "bookCode": "ROM"
+    },
+    {
+      "day": 186,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 1,
+      "reference": "1 Corinthians 1",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 187,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 2,
+      "reference": "1 Corinthians 2",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 188,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 27,
+      "reference": "Psalms 27",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 189,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 27,
+      "reference": "Proverbs 27",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 190,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 3,
+      "reference": "1 Corinthians 3",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 191,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 4,
+      "reference": "1 Corinthians 4",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 192,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 5,
+      "reference": "1 Corinthians 5",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 193,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 6,
+      "reference": "1 Corinthians 6",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 194,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 7,
+      "reference": "1 Corinthians 7",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 195,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 28,
+      "reference": "Psalms 28",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 196,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 28,
+      "reference": "Proverbs 28",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 197,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 8,
+      "reference": "1 Corinthians 8",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 198,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 9,
+      "reference": "1 Corinthians 9",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 199,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 10,
+      "reference": "1 Corinthians 10",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 200,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 11,
+      "reference": "1 Corinthians 11",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 201,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 12,
+      "reference": "1 Corinthians 12",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 202,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 29,
+      "reference": "Psalms 29",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 203,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 29,
+      "reference": "Proverbs 29",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 204,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 13,
+      "reference": "1 Corinthians 13",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 205,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 14,
+      "reference": "1 Corinthians 14",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 206,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 15,
+      "reference": "1 Corinthians 15",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 207,
+      "type": "New Testament",
+      "book": "1 Corinthians",
+      "chapter": 16,
+      "reference": "1 Corinthians 16",
+      "bookCode": "1CO"
+    },
+    {
+      "day": 208,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 1,
+      "reference": "2 Corinthians 1",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 209,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 30,
+      "reference": "Psalms 30",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 210,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 30,
+      "reference": "Proverbs 30",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 211,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 2,
+      "reference": "2 Corinthians 2",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 212,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 3,
+      "reference": "2 Corinthians 3",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 213,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 4,
+      "reference": "2 Corinthians 4",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 214,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 5,
+      "reference": "2 Corinthians 5",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 215,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 6,
+      "reference": "2 Corinthians 6",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 216,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 31,
+      "reference": "Psalms 31",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 217,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Proverbs",
+      "chapter": 31,
+      "reference": "Proverbs 31",
+      "bookCode": "PRO"
+    },
+    {
+      "day": 218,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 7,
+      "reference": "2 Corinthians 7",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 219,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 8,
+      "reference": "2 Corinthians 8",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 220,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 9,
+      "reference": "2 Corinthians 9",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 221,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 10,
+      "reference": "2 Corinthians 10",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 222,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 11,
+      "reference": "2 Corinthians 11",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 223,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 32,
+      "reference": "Psalms 32",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 224,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 33,
+      "reference": "Psalms 33",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 225,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 12,
+      "reference": "2 Corinthians 12",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 226,
+      "type": "New Testament",
+      "book": "2 Corinthians",
+      "chapter": 13,
+      "reference": "2 Corinthians 13",
+      "bookCode": "2CO"
+    },
+    {
+      "day": 227,
+      "type": "New Testament",
+      "book": "Galatians",
+      "chapter": 1,
+      "reference": "Galatians 1",
+      "bookCode": "GAL"
+    },
+    {
+      "day": 228,
+      "type": "New Testament",
+      "book": "Galatians",
+      "chapter": 2,
+      "reference": "Galatians 2",
+      "bookCode": "GAL"
+    },
+    {
+      "day": 229,
+      "type": "New Testament",
+      "book": "Galatians",
+      "chapter": 3,
+      "reference": "Galatians 3",
+      "bookCode": "GAL"
+    },
+    {
+      "day": 230,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 34,
+      "reference": "Psalms 34",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 231,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 35,
+      "reference": "Psalms 35",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 232,
+      "type": "New Testament",
+      "book": "Galatians",
+      "chapter": 4,
+      "reference": "Galatians 4",
+      "bookCode": "GAL"
+    },
+    {
+      "day": 233,
+      "type": "New Testament",
+      "book": "Galatians",
+      "chapter": 5,
+      "reference": "Galatians 5",
+      "bookCode": "GAL"
+    },
+    {
+      "day": 234,
+      "type": "New Testament",
+      "book": "Galatians",
+      "chapter": 6,
+      "reference": "Galatians 6",
+      "bookCode": "GAL"
+    },
+    {
+      "day": 235,
+      "type": "New Testament",
+      "book": "Ephesians",
+      "chapter": 1,
+      "reference": "Ephesians 1",
+      "bookCode": "EPH"
+    },
+    {
+      "day": 236,
+      "type": "New Testament",
+      "book": "Ephesians",
+      "chapter": 2,
+      "reference": "Ephesians 2",
+      "bookCode": "EPH"
+    },
+    {
+      "day": 237,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 36,
+      "reference": "Psalms 36",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 238,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 37,
+      "reference": "Psalms 37",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 239,
+      "type": "New Testament",
+      "book": "Ephesians",
+      "chapter": 3,
+      "reference": "Ephesians 3",
+      "bookCode": "EPH"
+    },
+    {
+      "day": 240,
+      "type": "New Testament",
+      "book": "Ephesians",
+      "chapter": 4,
+      "reference": "Ephesians 4",
+      "bookCode": "EPH"
+    },
+    {
+      "day": 241,
+      "type": "New Testament",
+      "book": "Ephesians",
+      "chapter": 5,
+      "reference": "Ephesians 5",
+      "bookCode": "EPH"
+    },
+    {
+      "day": 242,
+      "type": "New Testament",
+      "book": "Ephesians",
+      "chapter": 6,
+      "reference": "Ephesians 6",
+      "bookCode": "EPH"
+    },
+    {
+      "day": 243,
+      "type": "New Testament",
+      "book": "Philippians",
+      "chapter": 1,
+      "reference": "Philippians 1",
+      "bookCode": "PHP"
+    },
+    {
+      "day": 244,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 38,
+      "reference": "Psalms 38",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 245,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 39,
+      "reference": "Psalms 39",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 246,
+      "type": "New Testament",
+      "book": "Philippians",
+      "chapter": 2,
+      "reference": "Philippians 2",
+      "bookCode": "PHP"
+    },
+    {
+      "day": 247,
+      "type": "New Testament",
+      "book": "Philippians",
+      "chapter": 3,
+      "reference": "Philippians 3",
+      "bookCode": "PHP"
+    },
+    {
+      "day": 248,
+      "type": "New Testament",
+      "book": "Philippians",
+      "chapter": 4,
+      "reference": "Philippians 4",
+      "bookCode": "PHP"
+    },
+    {
+      "day": 249,
+      "type": "New Testament",
+      "book": "Colossians",
+      "chapter": 1,
+      "reference": "Colossians 1",
+      "bookCode": "COL"
+    },
+    {
+      "day": 250,
+      "type": "New Testament",
+      "book": "Colossians",
+      "chapter": 2,
+      "reference": "Colossians 2",
+      "bookCode": "COL"
+    },
+    {
+      "day": 251,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 40,
+      "reference": "Psalms 40",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 252,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 41,
+      "reference": "Psalms 41",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 253,
+      "type": "New Testament",
+      "book": "Colossians",
+      "chapter": 3,
+      "reference": "Colossians 3",
+      "bookCode": "COL"
+    },
+    {
+      "day": 254,
+      "type": "New Testament",
+      "book": "Colossians",
+      "chapter": 4,
+      "reference": "Colossians 4",
+      "bookCode": "COL"
+    },
+    {
+      "day": 255,
+      "type": "New Testament",
+      "book": "1 Thessalonians",
+      "chapter": 1,
+      "reference": "1 Thessalonians 1",
+      "bookCode": "1TH"
+    },
+    {
+      "day": 256,
+      "type": "New Testament",
+      "book": "1 Thessalonians",
+      "chapter": 2,
+      "reference": "1 Thessalonians 2",
+      "bookCode": "1TH"
+    },
+    {
+      "day": 257,
+      "type": "New Testament",
+      "book": "1 Thessalonians",
+      "chapter": 3,
+      "reference": "1 Thessalonians 3",
+      "bookCode": "1TH"
+    },
+    {
+      "day": 258,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 42,
+      "reference": "Psalms 42",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 259,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 43,
+      "reference": "Psalms 43",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 260,
+      "type": "New Testament",
+      "book": "1 Thessalonians",
+      "chapter": 4,
+      "reference": "1 Thessalonians 4",
+      "bookCode": "1TH"
+    },
+    {
+      "day": 261,
+      "type": "New Testament",
+      "book": "1 Thessalonians",
+      "chapter": 5,
+      "reference": "1 Thessalonians 5",
+      "bookCode": "1TH"
+    },
+    {
+      "day": 262,
+      "type": "New Testament",
+      "book": "2 Thessalonians",
+      "chapter": 1,
+      "reference": "2 Thessalonians 1",
+      "bookCode": "2TH"
+    },
+    {
+      "day": 263,
+      "type": "New Testament",
+      "book": "2 Thessalonians",
+      "chapter": 2,
+      "reference": "2 Thessalonians 2",
+      "bookCode": "2TH"
+    },
+    {
+      "day": 264,
+      "type": "New Testament",
+      "book": "2 Thessalonians",
+      "chapter": 3,
+      "reference": "2 Thessalonians 3",
+      "bookCode": "2TH"
+    },
+    {
+      "day": 265,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 44,
+      "reference": "Psalms 44",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 266,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 45,
+      "reference": "Psalms 45",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 267,
+      "type": "New Testament",
+      "book": "1 Timothy",
+      "chapter": 1,
+      "reference": "1 Timothy 1",
+      "bookCode": "1TI"
+    },
+    {
+      "day": 268,
+      "type": "New Testament",
+      "book": "1 Timothy",
+      "chapter": 2,
+      "reference": "1 Timothy 2",
+      "bookCode": "1TI"
+    },
+    {
+      "day": 269,
+      "type": "New Testament",
+      "book": "1 Timothy",
+      "chapter": 3,
+      "reference": "1 Timothy 3",
+      "bookCode": "1TI"
+    },
+    {
+      "day": 270,
+      "type": "New Testament",
+      "book": "1 Timothy",
+      "chapter": 4,
+      "reference": "1 Timothy 4",
+      "bookCode": "1TI"
+    },
+    {
+      "day": 271,
+      "type": "New Testament",
+      "book": "1 Timothy",
+      "chapter": 5,
+      "reference": "1 Timothy 5",
+      "bookCode": "1TI"
+    },
+    {
+      "day": 272,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 46,
+      "reference": "Psalms 46",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 273,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 47,
+      "reference": "Psalms 47",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 274,
+      "type": "New Testament",
+      "book": "1 Timothy",
+      "chapter": 6,
+      "reference": "1 Timothy 6",
+      "bookCode": "1TI"
+    },
+    {
+      "day": 275,
+      "type": "New Testament",
+      "book": "2 Timothy",
+      "chapter": 1,
+      "reference": "2 Timothy 1",
+      "bookCode": "2TI"
+    },
+    {
+      "day": 276,
+      "type": "New Testament",
+      "book": "2 Timothy",
+      "chapter": 2,
+      "reference": "2 Timothy 2",
+      "bookCode": "2TI"
+    },
+    {
+      "day": 277,
+      "type": "New Testament",
+      "book": "2 Timothy",
+      "chapter": 3,
+      "reference": "2 Timothy 3",
+      "bookCode": "2TI"
+    },
+    {
+      "day": 278,
+      "type": "New Testament",
+      "book": "2 Timothy",
+      "chapter": 4,
+      "reference": "2 Timothy 4",
+      "bookCode": "2TI"
+    },
+    {
+      "day": 279,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 48,
+      "reference": "Psalms 48",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 280,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 49,
+      "reference": "Psalms 49",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 281,
+      "type": "New Testament",
+      "book": "Titus",
+      "chapter": 1,
+      "reference": "Titus 1",
+      "bookCode": "TIT"
+    },
+    {
+      "day": 282,
+      "type": "New Testament",
+      "book": "Titus",
+      "chapter": 2,
+      "reference": "Titus 2",
+      "bookCode": "TIT"
+    },
+    {
+      "day": 283,
+      "type": "New Testament",
+      "book": "Titus",
+      "chapter": 3,
+      "reference": "Titus 3",
+      "bookCode": "TIT"
+    },
+    {
+      "day": 284,
+      "type": "New Testament",
+      "book": "Philemon",
+      "chapter": 1,
+      "reference": "Philemon 1",
+      "bookCode": "PHM"
+    },
+    {
+      "day": 285,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 1,
+      "reference": "Hebrews 1",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 286,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 50,
+      "reference": "Psalms 50",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 287,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 51,
+      "reference": "Psalms 51",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 288,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 2,
+      "reference": "Hebrews 2",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 289,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 3,
+      "reference": "Hebrews 3",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 290,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 4,
+      "reference": "Hebrews 4",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 291,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 5,
+      "reference": "Hebrews 5",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 292,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 6,
+      "reference": "Hebrews 6",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 293,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 52,
+      "reference": "Psalms 52",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 294,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 53,
+      "reference": "Psalms 53",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 295,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 7,
+      "reference": "Hebrews 7",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 296,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 8,
+      "reference": "Hebrews 8",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 297,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 9,
+      "reference": "Hebrews 9",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 298,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 10,
+      "reference": "Hebrews 10",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 299,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 11,
+      "reference": "Hebrews 11",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 300,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 54,
+      "reference": "Psalms 54",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 301,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 55,
+      "reference": "Psalms 55",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 302,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 12,
+      "reference": "Hebrews 12",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 303,
+      "type": "New Testament",
+      "book": "Hebrews",
+      "chapter": 13,
+      "reference": "Hebrews 13",
+      "bookCode": "HEB"
+    },
+    {
+      "day": 304,
+      "type": "New Testament",
+      "book": "James",
+      "chapter": 1,
+      "reference": "James 1",
+      "bookCode": "JAS"
+    },
+    {
+      "day": 305,
+      "type": "New Testament",
+      "book": "James",
+      "chapter": 2,
+      "reference": "James 2",
+      "bookCode": "JAS"
+    },
+    {
+      "day": 306,
+      "type": "New Testament",
+      "book": "James",
+      "chapter": 3,
+      "reference": "James 3",
+      "bookCode": "JAS"
+    },
+    {
+      "day": 307,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 56,
+      "reference": "Psalms 56",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 308,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 57,
+      "reference": "Psalms 57",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 309,
+      "type": "New Testament",
+      "book": "James",
+      "chapter": 4,
+      "reference": "James 4",
+      "bookCode": "JAS"
+    },
+    {
+      "day": 310,
+      "type": "New Testament",
+      "book": "James",
+      "chapter": 5,
+      "reference": "James 5",
+      "bookCode": "JAS"
+    },
+    {
+      "day": 311,
+      "type": "New Testament",
+      "book": "1 Peter",
+      "chapter": 1,
+      "reference": "1 Peter 1",
+      "bookCode": "1PE"
+    },
+    {
+      "day": 312,
+      "type": "New Testament",
+      "book": "1 Peter",
+      "chapter": 2,
+      "reference": "1 Peter 2",
+      "bookCode": "1PE"
+    },
+    {
+      "day": 313,
+      "type": "New Testament",
+      "book": "1 Peter",
+      "chapter": 3,
+      "reference": "1 Peter 3",
+      "bookCode": "1PE"
+    },
+    {
+      "day": 314,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 58,
+      "reference": "Psalms 58",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 315,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 59,
+      "reference": "Psalms 59",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 316,
+      "type": "New Testament",
+      "book": "1 Peter",
+      "chapter": 4,
+      "reference": "1 Peter 4",
+      "bookCode": "1PE"
+    },
+    {
+      "day": 317,
+      "type": "New Testament",
+      "book": "1 Peter",
+      "chapter": 5,
+      "reference": "1 Peter 5",
+      "bookCode": "1PE"
+    },
+    {
+      "day": 318,
+      "type": "New Testament",
+      "book": "2 Peter",
+      "chapter": 1,
+      "reference": "2 Peter 1",
+      "bookCode": "2PE"
+    },
+    {
+      "day": 319,
+      "type": "New Testament",
+      "book": "2 Peter",
+      "chapter": 2,
+      "reference": "2 Peter 2",
+      "bookCode": "2PE"
+    },
+    {
+      "day": 320,
+      "type": "New Testament",
+      "book": "2 Peter",
+      "chapter": 3,
+      "reference": "2 Peter 3",
+      "bookCode": "2PE"
+    },
+    {
+      "day": 321,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 60,
+      "reference": "Psalms 60",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 322,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 61,
+      "reference": "Psalms 61",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 323,
+      "type": "New Testament",
+      "book": "1 John",
+      "chapter": 1,
+      "reference": "1 John 1",
+      "bookCode": "1JN"
+    },
+    {
+      "day": 324,
+      "type": "New Testament",
+      "book": "1 John",
+      "chapter": 2,
+      "reference": "1 John 2",
+      "bookCode": "1JN"
+    },
+    {
+      "day": 325,
+      "type": "New Testament",
+      "book": "1 John",
+      "chapter": 3,
+      "reference": "1 John 3",
+      "bookCode": "1JN"
+    },
+    {
+      "day": 326,
+      "type": "New Testament",
+      "book": "1 John",
+      "chapter": 4,
+      "reference": "1 John 4",
+      "bookCode": "1JN"
+    },
+    {
+      "day": 327,
+      "type": "New Testament",
+      "book": "1 John",
+      "chapter": 5,
+      "reference": "1 John 5",
+      "bookCode": "1JN"
+    },
+    {
+      "day": 328,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 62,
+      "reference": "Psalms 62",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 329,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 63,
+      "reference": "Psalms 63",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 330,
+      "type": "New Testament",
+      "book": "2 John",
+      "chapter": 1,
+      "reference": "2 John 1",
+      "bookCode": "2JN"
+    },
+    {
+      "day": 331,
+      "type": "New Testament",
+      "book": "3 John",
+      "chapter": 1,
+      "reference": "3 John 1",
+      "bookCode": "3JN"
+    },
+    {
+      "day": 332,
+      "type": "New Testament",
+      "book": "Jude",
+      "chapter": 1,
+      "reference": "Jude 1",
+      "bookCode": "JUD"
+    },
+    {
+      "day": 333,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 1,
+      "reference": "Revelation 1",
+      "bookCode": "REV"
+    },
+    {
+      "day": 334,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 2,
+      "reference": "Revelation 2",
+      "bookCode": "REV"
+    },
+    {
+      "day": 335,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 64,
+      "reference": "Psalms 64",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 336,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 65,
+      "reference": "Psalms 65",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 337,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 3,
+      "reference": "Revelation 3",
+      "bookCode": "REV"
+    },
+    {
+      "day": 338,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 4,
+      "reference": "Revelation 4",
+      "bookCode": "REV"
+    },
+    {
+      "day": 339,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 5,
+      "reference": "Revelation 5",
+      "bookCode": "REV"
+    },
+    {
+      "day": 340,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 6,
+      "reference": "Revelation 6",
+      "bookCode": "REV"
+    },
+    {
+      "day": 341,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 7,
+      "reference": "Revelation 7",
+      "bookCode": "REV"
+    },
+    {
+      "day": 342,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 66,
+      "reference": "Psalms 66",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 343,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 67,
+      "reference": "Psalms 67",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 344,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 8,
+      "reference": "Revelation 8",
+      "bookCode": "REV"
+    },
+    {
+      "day": 345,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 9,
+      "reference": "Revelation 9",
+      "bookCode": "REV"
+    },
+    {
+      "day": 346,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 10,
+      "reference": "Revelation 10",
+      "bookCode": "REV"
+    },
+    {
+      "day": 347,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 11,
+      "reference": "Revelation 11",
+      "bookCode": "REV"
+    },
+    {
+      "day": 348,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 12,
+      "reference": "Revelation 12",
+      "bookCode": "REV"
+    },
+    {
+      "day": 349,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 68,
+      "reference": "Psalms 68",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 350,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 69,
+      "reference": "Psalms 69",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 351,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 13,
+      "reference": "Revelation 13",
+      "bookCode": "REV"
+    },
+    {
+      "day": 352,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 14,
+      "reference": "Revelation 14",
+      "bookCode": "REV"
+    },
+    {
+      "day": 353,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 15,
+      "reference": "Revelation 15",
+      "bookCode": "REV"
+    },
+    {
+      "day": 354,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 16,
+      "reference": "Revelation 16",
+      "bookCode": "REV"
+    },
+    {
+      "day": 355,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 17,
+      "reference": "Revelation 17",
+      "bookCode": "REV"
+    },
+    {
+      "day": 356,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 70,
+      "reference": "Psalms 70",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 357,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 71,
+      "reference": "Psalms 71",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 358,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 18,
+      "reference": "Revelation 18",
+      "bookCode": "REV"
+    },
+    {
+      "day": 359,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 19,
+      "reference": "Revelation 19",
+      "bookCode": "REV"
+    },
+    {
+      "day": 360,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 20,
+      "reference": "Revelation 20",
+      "bookCode": "REV"
+    },
+    {
+      "day": 361,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 21,
+      "reference": "Revelation 21",
+      "bookCode": "REV"
+    },
+    {
+      "day": 362,
+      "type": "New Testament",
+      "book": "Revelation",
+      "chapter": 22,
+      "reference": "Revelation 22",
+      "bookCode": "REV"
+    },
+    {
+      "day": 363,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 72,
+      "reference": "Psalms 72",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 364,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 73,
+      "reference": "Psalms 73",
+      "bookCode": "PSA"
+    },
+    {
+      "day": 365,
+      "type": "Reflection (Psalms/Proverbs)",
+      "book": "Psalms",
+      "chapter": 74,
+      "reference": "Psalms 74",
+      "bookCode": "PSA"
+    }
+  ]
+}

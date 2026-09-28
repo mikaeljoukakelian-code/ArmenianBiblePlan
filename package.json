@@ -1,0 +1,15 @@
+{
+  "name": "bible-study-plans",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generates two bible.com daily reading plans: (1) New Testament + Psalms/Proverbs in a year, and (2) the Armenian Apostolic Church daily lectionary.",
+  "type": "commonjs",
+  "scripts": {
+    "gen:nt": "node scripts/generate_nt_plan.js",
+    "gen:armenian": "node scripts/scrape_armenian_readings.js",
+    "gen:site": "node scripts/build_site.js"
+  },
+  "dependencies": {
+    "pdf-parse": "^1.1.1"
+  }
+}
