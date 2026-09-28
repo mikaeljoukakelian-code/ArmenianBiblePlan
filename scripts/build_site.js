@@ -45,20 +45,28 @@ function classifyDay(title) {
   return { fast, feast };
 }
 
-// Parses a reference string like "Isaiah 51:15-52:3" into { book, chapter } using the START chapter,
-// for building a bible.com chapter-level deep link.
+// Parses a reference string like "Isaiah 51:15-52:3" (cross-chapter), "Hebrews 12:5-17" (same
+// chapter), or "Genesis 1:1" (single verse) into book/chapter/verse detail. bible.com supports
+// verse-precise deep links only *within* a single chapter (BOOK.chapter.verse[-verse]); a range
+// spanning chapters 404s, so cross-chapter refs are resolved into two same-chapter links by the
+// caller: the exact starting verse, and the exact ending chapter's 1-through-endVerse range.
 function parseReference(ref) {
-  const m = /^([1-3]?\s?[A-Za-z][A-Za-z. ]*?)\s+(\d+)/.exec(ref);
+  const m = /^([1-3]?\s?[A-Za-z][A-Za-z. ]*?)\s+(\d+):(\d+)(?:[-\u2013\u2014](?:(\d+):)?(\d+))?/.exec(ref);
   if (!m) return null;
   const book = normalizeBookName(m[1].trim());
-  const chapter = parseInt(m[2], 10);
   const code = BOOK_CODES[book];
   if (!code) return null;
-  return { book, chapter, code };
+  const startChapter = parseInt(m[2], 10);
+  const startVerse = parseInt(m[3], 10);
+  const hasRange = m[5] !== undefined;
+  const endChapter = m[4] ? parseInt(m[4], 10) : startChapter;
+  const endVerse = hasRange ? parseInt(m[5], 10) : startVerse;
+  return { book, code, startChapter, startVerse, endChapter, endVerse, crossesChapters: endChapter !== startChapter };
 }
 
-function bibleLink(versionId, code, chapter) {
-  return `https://www.bible.com/bible/${versionId}/${code}.${chapter}`;
+function bibleLink(versionId, code, chapter, verse, endVerse) {
+  const versePart = verse ? (endVerse && endVerse !== verse ? `.${verse}-${endVerse}` : `.${verse}`) : "";
+  return `https://www.bible.com/bible/${versionId}/${code}.${chapter}${versePart}`;
 }
 
 function escapeHtml(s) {
@@ -67,17 +75,31 @@ function escapeHtml(s) {
   }[c]));
 }
 
-// Builds { text, armUrl, armDeutero, enUrl } for one reference string, or { text, unresolved: true }.
+// Builds link info for one reference string. For same-chapter refs, produces one precise verse-range
+// link. For refs that cross chapters (e.g. "Luke 20:41-21:4"), bible.com can't link a single range, so
+// this produces a primary link to the exact starting verse plus a "cont." link to the ending chapter's
+// 1-through-endVerse range, so the reader can jump straight to both the start and the conclusion.
 function buildRefLinks(ref) {
   const parsed = parseReference(ref);
   if (!parsed) return { text: ref, unresolved: true };
-  const { book, code, chapter } = parsed;
+  const { book, code, startChapter, startVerse, endChapter, endVerse, crossesChapters } = parsed;
   const isDeutero = DEUTERO_BOOKS.has(book);
   const isNt = NT_BOOKS.has(book);
   const armVersionId = isDeutero ? ARMENIAN_DEUTERO_VERSION_ID : (isNt ? ARMENIAN_NT_VERSION_ID : ARMENIAN_OT_VERSION_ID);
-  const armUrl = bibleLink(armVersionId, code, chapter);
-  const enUrl = isDeutero ? null : bibleLink(ENGLISH_VERSION_ID, code, chapter);
-  return { text: ref, armUrl, armDeutero: isDeutero, enUrl };
+
+  const makeLink = (versionId, chapter, verse, verseEnd) => bibleLink(versionId, code, chapter, verse, verseEnd);
+
+  const armUrl = crossesChapters
+    ? makeLink(armVersionId, startChapter, startVerse)
+    : makeLink(armVersionId, startChapter, startVerse, endVerse);
+  const armContUrl = crossesChapters ? makeLink(armVersionId, endChapter, 1, endVerse) : null;
+
+  const enUrl = isDeutero ? null : (crossesChapters
+    ? makeLink(ENGLISH_VERSION_ID, startChapter, startVerse)
+    : makeLink(ENGLISH_VERSION_ID, startChapter, startVerse, endVerse));
+  const enContUrl = (isDeutero || !crossesChapters) ? null : makeLink(ENGLISH_VERSION_ID, endChapter, 1, endVerse);
+
+  return { text: ref, armUrl, armContUrl, armDeutero: isDeutero, enUrl, enContUrl };
 }
 
 // Precompute the full 365-day calendar (including "No Readings" days) with resolved links, used both
@@ -99,8 +121,9 @@ const CALENDAR_DAYS = ARM_PLAN.calendar.map((d) => {
 function renderRefHtml(r) {
   if (r.unresolved) return `<span class="unresolved">${escapeHtml(r.text)}</span>`;
   const deuteroNote = r.armDeutero ? ' <sup title="Not in WARMB/WANTACOC or NKJV; shown from the ՆԷԱ (New Ejmiatsin) Armenian Bible instead.">&dagger;</sup>' : "";
+  const cont = r.armContUrl ? ` <a class="cont-link" href="${r.armContUrl}" target="_blank" rel="noopener" title="Continue reading to the end of this passage">cont.&rarr;</a>` : "";
   const en = r.enUrl ? ` <a class="en-link" href="${r.enUrl}" target="_blank" rel="noopener">EN</a>` : "";
-  return `<a class="arm-link" href="${r.armUrl}" target="_blank" rel="noopener">${escapeHtml(r.text)}</a>${deuteroNote}${en}`;
+  return `<a class="arm-link" href="${r.armUrl}" target="_blank" rel="noopener">${escapeHtml(r.text)}</a>${deuteroNote}${cont}${en}`;
 }
 
 function renderDayInner(d) {
@@ -130,8 +153,8 @@ const CALENDAR_JSON = JSON.stringify(CALENDAR_DAYS.map((d) => ({
   html: renderDayInner(d),
 })));
 
-// Copy the cropped background photo (left side of the Sevan peninsula panorama) into site/ so the
-// static page can reference it with a plain relative path.
+// Copy the cropped photo (left side of the Sevan peninsula panorama) into site/ so the static page
+// can reference it with a plain relative path, used as a top banner image above the content.
 const bgSrc = path.join(__dirname, "..", "data", "sevan_left.jpg");
 const bgFileName = "sevan_left.jpg";
 fs.mkdirSync(path.join(__dirname, "..", "site"), { recursive: true });
@@ -144,17 +167,15 @@ const html = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Armenian Apostolic Daily Bible Readings - 2026</title>
 <style>
-  body {
-    font-family: Georgia, 'Times New Roman', serif; line-height: 1.5; color: #222;
-    background: #0e2a1e url('${bgFileName}') no-repeat center center fixed;
-    background-size: cover;
-    margin: 0; padding: 1.5rem 0 3rem;
-  }
-  .page { max-width: 900px; margin: 0 auto; background: rgba(253, 250, 245, 0.93); border-radius: 12px; padding: 1.5rem 1.75rem; box-shadow: 0 4px 24px rgba(0,0,0,0.35); }
+  body { font-family: Georgia, 'Times New Roman', serif; line-height: 1.5; color: #222; background: #fdfaf5; margin: 0; padding: 0 0 3rem; }
+  .banner { width: 100%; max-height: 260px; object-fit: cover; object-position: center 35%; display: block; }
+  .page { max-width: 900px; margin: 0 auto; padding: 1.5rem 1.75rem; }
   h1 { font-size: 1.6rem; margin-top: 0; }
   h2 { border-bottom: 2px solid #7a1f2b; padding-bottom: 0.3rem; margin-top: 1.5rem; }
-  .desc { color: #444; margin-bottom: 1rem; }
-  .attribution { font-size: 0.85rem; color: #666; margin-bottom: 1.5rem; }
+  .summary { color: #444; margin-bottom: 0.4rem; }
+  .more-info { font-size: 0.9rem; color: #555; margin-bottom: 1.5rem; }
+  .more-info summary { cursor: pointer; color: #7a1f2b; font-weight: bold; margin-bottom: 0.5rem; }
+  .more-info p { margin: 0.5rem 0; }
   #today-card { border: 2px solid #7a1f2b; background: #fff8ef; border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
   #today-card.feast { border-color: #c9971b; background: #fff8e2; }
   #today-card.fast { border-color: #5b7c99; background: #eef4f8; }
@@ -177,10 +198,12 @@ const html = `<!DOCTYPE html>
   a:hover { text-decoration: underline; }
   a.en-link { font-size: 0.8rem; color: #7a1f2b; border: 1px solid #7a1f2b; border-radius: 4px; padding: 0 0.3rem; text-decoration: none; }
   a.en-link:hover { background: #7a1f2b; color: #fff; }
+  a.cont-link { font-size: 0.8rem; color: #888; }
   .unresolved, .no-readings { color: #999; font-style: italic; }
 </style>
 </head>
 <body>
+<img class="banner" src="${bgFileName}" alt="Sevan peninsula monasteries, Armenia">
 <div class="page">
 <h1>📖 Armenian Apostolic Daily Bible Readings (2026)</h1>
 
@@ -189,13 +212,16 @@ const html = `<!DOCTYPE html>
   <div id="today-body">Loading...</div>
 </div>
 
-<p class="desc" lang="hy">${escapeHtml(ARM_PLAN.meta.nameHy)}</p>
-<p class="desc">${escapeHtml(ARM_PLAN.meta.descriptionEn)}</p>
-<p class="attribution">${escapeHtml(ARM_PLAN.meta.attributionEn)}</p>
-<p class="attribution">Armenian links use the Western Armenian Bible (WARMB, bible.com version ${ARMENIAN_OT_VERSION_ID}) for Old Testament readings and the Western Armenian New Translation (WANTACOC, version ${ARMENIAN_NT_VERSION_ID}) for New Testament readings. English "EN" links use the NKJV (version ${ENGLISH_VERSION_ID}). A few readings cite deuterocanonical books (Tobit, Judith, Wisdom, Sirach, Baruch, 1-2 Maccabees, marked &dagger;) that aren't included in WARMB, WANTACOC, or the NKJV - those links fall back to the ՆԷԱ (New Ejmiatsin) Armenian Bible, and no English link is shown. <span class="badge feast-badge">Feast</span> and <span class="badge fast-badge">Fast</span> days are highlighted below.</p>
+<p class="summary">Daily Scripture readings for 2026 following the Armenian Apostolic Church's liturgical calendar, compiled by AREC (Western Prelacy).</p>
+<details class="more-info">
+  <summary>More info</summary>
+  <p lang="hy">${escapeHtml(ARM_PLAN.meta.nameHy)}</p>
+  <p>${escapeHtml(ARM_PLAN.meta.descriptionEn)}</p>
+  <p>${escapeHtml(ARM_PLAN.meta.attributionEn)}</p>
+  <p>Armenian links use the Western Armenian Bible (WARMB, bible.com version ${ARMENIAN_OT_VERSION_ID}) for Old Testament readings and the Western Armenian New Translation (WANTACOC, version ${ARMENIAN_NT_VERSION_ID}) for New Testament readings. English "EN" links use the NKJV (version ${ENGLISH_VERSION_ID}). A few readings cite deuterocanonical books (Tobit, Judith, Wisdom, Sirach, Baruch, 1-2 Maccabees, marked &dagger;) that aren't included in WARMB, WANTACOC, or the NKJV - those links fall back to the ՆԷԱ (New Ejmiatsin) Armenian Bible, and no English link is shown. <span class="badge feast-badge">Feast</span> and <span class="badge fast-badge">Fast</span> days are highlighted below. References that span more than one chapter show a "cont.&rarr;" link to jump to the concluding chapter.</p>
+</details>
 
-<input type="search" class="filter" placeholder="Search by date, feast, or book (e.g. 'January 1' or 'Isaiah')...">
-<ul class="plan" id="plan-list">
+<input type="search" class="filter" placeholder="Search by date, feast, or book (e.g. 'January 1' or 'Isaiah')..."><ul class="plan" id="plan-list">
 ${renderCalendarDays()}
 </ul>
 </div>
