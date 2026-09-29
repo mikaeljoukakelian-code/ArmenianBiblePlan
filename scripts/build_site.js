@@ -45,26 +45,25 @@ function classifyDay(title) {
   return { fast, feast };
 }
 
-// Parses a reference string like "Isaiah 51:15-52:3" into { book, chapter } using the START chapter,
-// for building a bible.com chapter-level deep link.
-//
-// NOTE: bible.com also supports verse-precise deep links (BOOK.chapter.verse[-verse]), and this was
-// tried, but reverted: on mobile, tapping such a link into the Bible app frequently left the app
-// showing the previous screen and needed 2-3 taps before it caught up, and on desktop the verse-range
-// view is a cramped "excerpt card" rather than the normal, nicely formatted chapter reader. Full
-// chapter links are reliable on both and look right, so that's what's used.
+// Parses a reference like "Isaiah 51:15-52:3" (crosses chapters) or "Hebrews 12:5-17" (single
+// chapter). Full-chapter links are used by default (reliable, well-formatted on mobile and desktop),
+// except when a reference crosses chapters - then the start chapter's verse is kept so the link lands
+// on verse 41 of Luke 20 rather than verse 1, since starting at chapter 1 would be well before the
+// actual reading.
 function parseReference(ref) {
-  const m = /^([1-3]?\s?[A-Za-z][A-Za-z. ]*?)\s+(\d+)/.exec(ref);
+  const m = /^([1-3]?\s?[A-Za-z][A-Za-z. ]*?)\s+(\d+):(\d+)(?:[-\u2013\u2014](?:(\d+):)?(\d+))?/.exec(ref);
   if (!m) return null;
   const book = normalizeBookName(m[1].trim());
-  const chapter = parseInt(m[2], 10);
   const code = BOOK_CODES[book];
   if (!code) return null;
-  return { book, chapter, code };
+  const chapter = parseInt(m[2], 10);
+  const startVerse = parseInt(m[3], 10);
+  const crossesChapters = m[4] !== undefined;
+  return { book, code, chapter, startVerse, crossesChapters };
 }
 
-function bibleLink(versionId, code, chapter) {
-  return `https://www.bible.com/bible/${versionId}/${code}.${chapter}`;
+function bibleLink(versionId, code, chapter, verse) {
+  return `https://www.bible.com/bible/${versionId}/${code}.${chapter}${verse ? `.${verse}` : ""}`;
 }
 
 function escapeHtml(s) {
@@ -77,12 +76,13 @@ function escapeHtml(s) {
 function buildRefLinks(ref) {
   const parsed = parseReference(ref);
   if (!parsed) return { text: ref, unresolved: true };
-  const { book, code, chapter } = parsed;
+  const { book, code, chapter, startVerse, crossesChapters } = parsed;
+  const verse = crossesChapters ? startVerse : undefined;
   const isDeutero = DEUTERO_BOOKS.has(book);
   const isNt = NT_BOOKS.has(book);
   const armVersionId = isDeutero ? ARMENIAN_DEUTERO_VERSION_ID : (isNt ? ARMENIAN_NT_VERSION_ID : ARMENIAN_OT_VERSION_ID);
-  const armUrl = bibleLink(armVersionId, code, chapter);
-  const enUrl = isDeutero ? null : bibleLink(ENGLISH_VERSION_ID, code, chapter);
+  const armUrl = bibleLink(armVersionId, code, chapter, verse);
+  const enUrl = isDeutero ? null : bibleLink(ENGLISH_VERSION_ID, code, chapter, verse);
   return { text: ref, armUrl, armDeutero: isDeutero, enUrl };
 }
 
