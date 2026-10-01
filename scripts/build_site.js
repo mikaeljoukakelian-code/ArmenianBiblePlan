@@ -45,25 +45,27 @@ function classifyDay(title) {
   return { fast, feast };
 }
 
-// Parses a reference like "Isaiah 51:15-52:3" (crosses chapters) or "Hebrews 12:5-17" (single
-// chapter). Full-chapter links are used by default (reliable, well-formatted on mobile and desktop),
-// except when a reference crosses chapters - then the start chapter's verse is kept so the link lands
-// on verse 41 of Luke 20 rather than verse 1, since starting at chapter 1 would be well before the
-// actual reading.
+// Parses a reference like "Isaiah 51:15-52:3" (crosses chapters), "Mark 10:35-45" (same chapter), or
+// "Genesis 1:1" (single verse). bible.com only supports verse-precise links within a single chapter,
+// so cross-chapter refs are resolved into two same-chapter links by the caller: the exact starting
+// verse, and the ending chapter's 1-through-endVerse range.
 function parseReference(ref) {
   const m = /^([1-3]?\s?[A-Za-z][A-Za-z. ]*?)\s+(\d+):(\d+)(?:[-\u2013\u2014](?:(\d+):)?(\d+))?/.exec(ref);
   if (!m) return null;
   const book = normalizeBookName(m[1].trim());
   const code = BOOK_CODES[book];
   if (!code) return null;
-  const chapter = parseInt(m[2], 10);
+  const startChapter = parseInt(m[2], 10);
   const startVerse = parseInt(m[3], 10);
-  const crossesChapters = m[4] !== undefined;
-  return { book, code, chapter, startVerse, crossesChapters };
+  const hasRange = m[5] !== undefined;
+  const endChapter = m[4] ? parseInt(m[4], 10) : startChapter;
+  const endVerse = hasRange ? parseInt(m[5], 10) : startVerse;
+  return { book, code, startChapter, startVerse, endChapter, endVerse, crossesChapters: endChapter !== startChapter };
 }
 
-function bibleLink(versionId, code, chapter, verse) {
-  return `https://www.bible.com/bible/${versionId}/${code}.${chapter}${verse ? `.${verse}` : ""}`;
+function bibleLink(versionId, code, chapter, verse, endVerse) {
+  const versePart = verse ? (endVerse && endVerse !== verse ? `.${verse}-${endVerse}` : `.${verse}`) : "";
+  return `https://www.bible.com/bible/${versionId}/${code}.${chapter}${versePart}`;
 }
 
 function escapeHtml(s) {
@@ -72,18 +74,31 @@ function escapeHtml(s) {
   }[c]));
 }
 
-// Builds { text, armUrl, armDeutero, enUrl } for one reference string, or { text, unresolved: true }.
+// Builds link info for one reference string. Same-chapter refs get one precise verse-range link. Refs
+// that cross chapters (e.g. "Luke 20:41-21:4") can't be a single bible.com link, so this produces a
+// primary link to the exact starting verse plus a "cont." link to the ending chapter's 1-through-
+// endVerse range.
 function buildRefLinks(ref) {
   const parsed = parseReference(ref);
   if (!parsed) return { text: ref, unresolved: true };
-  const { book, code, chapter, startVerse, crossesChapters } = parsed;
-  const verse = crossesChapters ? startVerse : undefined;
+  const { book, code, startChapter, startVerse, endChapter, endVerse, crossesChapters } = parsed;
   const isDeutero = DEUTERO_BOOKS.has(book);
   const isNt = NT_BOOKS.has(book);
   const armVersionId = isDeutero ? ARMENIAN_DEUTERO_VERSION_ID : (isNt ? ARMENIAN_NT_VERSION_ID : ARMENIAN_OT_VERSION_ID);
-  const armUrl = bibleLink(armVersionId, code, chapter, verse);
-  const enUrl = isDeutero ? null : bibleLink(ENGLISH_VERSION_ID, code, chapter, verse);
-  return { text: ref, armUrl, armDeutero: isDeutero, enUrl };
+
+  const makeLink = (versionId, chapter, verse, verseEnd) => bibleLink(versionId, code, chapter, verse, verseEnd);
+
+  const armUrl = crossesChapters
+    ? makeLink(armVersionId, startChapter, startVerse)
+    : makeLink(armVersionId, startChapter, startVerse, endVerse);
+  const armContUrl = crossesChapters ? makeLink(armVersionId, endChapter, 1, endVerse) : null;
+
+  const enUrl = isDeutero ? null : (crossesChapters
+    ? makeLink(ENGLISH_VERSION_ID, startChapter, startVerse)
+    : makeLink(ENGLISH_VERSION_ID, startChapter, startVerse, endVerse));
+  const enContUrl = (isDeutero || !crossesChapters) ? null : makeLink(ENGLISH_VERSION_ID, endChapter, 1, endVerse);
+
+  return { text: ref, armUrl, armContUrl, armDeutero: isDeutero, enUrl, enContUrl };
 }
 
 // Precompute the full 365-day calendar (including "No Readings" days) with resolved links, used both
@@ -105,8 +120,9 @@ const CALENDAR_DAYS = ARM_PLAN.calendar.map((d) => {
 function renderRefHtml(r) {
   if (r.unresolved) return `<span class="unresolved">${escapeHtml(r.text)}</span>`;
   const deuteroNote = r.armDeutero ? ' <sup title="Not in WARMB/WANTACOC or NKJV; shown from the ՆԷԱ (New Ejmiatsin) Armenian Bible instead.">&dagger;</sup>' : "";
+  const cont = r.armContUrl ? ` <a class="cont-link" href="${r.armContUrl}" target="_blank" rel="noopener" title="Continue reading to the end of this passage">cont.&rarr;</a>` : "";
   const en = r.enUrl ? ` <a class="en-link" href="${r.enUrl}" target="_blank" rel="noopener">EN</a>` : "";
-  return `<a class="arm-link" href="${r.armUrl}" target="_blank" rel="noopener">${escapeHtml(r.text)}</a>${deuteroNote}${en}`;
+  return `<a class="arm-link" href="${r.armUrl}" target="_blank" rel="noopener">${escapeHtml(r.text)}</a>${deuteroNote}${cont}${en}`;
 }
 
 function renderDayInner(d) {
@@ -186,6 +202,7 @@ const html = `<!DOCTYPE html>
   a:hover { text-decoration: underline; }
   a.en-link { font-size: 0.8rem; color: #7a1f2b; border: 1px solid #7a1f2b; border-radius: 4px; padding: 0 0.3rem; text-decoration: none; }
   a.en-link:hover { background: #7a1f2b; color: #fff; }
+  a.cont-link { font-size: 0.8rem; color: #888; }
   .unresolved, .no-readings { color: #999; font-style: italic; }
 </style>
 <!-- Cloudflare Web Analytics -->
