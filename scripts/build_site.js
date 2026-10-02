@@ -99,7 +99,10 @@ function buildRefLinks(ref) {
     : makeLink(ENGLISH_VERSION_ID, startChapter, startVerse, endVerse));
   const enContUrl = (isDeutero || !crossesChapters) ? null : makeLink(ENGLISH_VERSION_ID, endChapter, 1, endVerse);
 
-  return { text: ref, armUrl, armContUrl, armDeutero: isDeutero, enUrl, enContUrl };
+  const part1Label = crossesChapters ? `${startChapter}:${startVerse} to end of chapter` : null;
+  const part2Label = crossesChapters ? `${endChapter}:1${endVerse > 1 ? `&ndash;${endVerse}` : ""}` : null;
+
+  return { text: ref, armUrl, armContUrl, armDeutero: isDeutero, enUrl, enContUrl, part1Label, part2Label };
 }
 
 // Precompute the full 365-day calendar (including "No Readings" days) with resolved links, used both
@@ -118,22 +121,54 @@ const CALENDAR_DAYS = ARM_PLAN.calendar.map((d) => {
   };
 });
 
+const DEUTERO_NOTE = ' <sup title="Not in WARMB/WANTACOC or NKJV; shown from the ՆԷԱ (New Ejmiatsin) Armenian Bible instead.">&dagger;</sup>';
+
 function renderRefHtml(r) {
   if (r.unresolved) return `<span class="unresolved">${escapeHtml(r.text)}</span>`;
-  const deuteroNote = r.armDeutero ? ' <sup title="Not in WARMB/WANTACOC or NKJV; shown from the ՆԷԱ (New Ejmiatsin) Armenian Bible instead.">&dagger;</sup>' : "";
+  const deuteroNote = r.armDeutero ? DEUTERO_NOTE : "";
   const cont = r.armContUrl ? ` <a class="cont-link" href="${r.armContUrl}" target="_blank" rel="noopener" title="Continue reading to the end of this passage">cont.&rarr;</a>` : "";
   const en = r.enUrl ? ` <a class="en-link" href="${r.enUrl}" target="_blank" rel="noopener">EN</a>` : "";
   return `<a class="arm-link" href="${r.armUrl}" target="_blank" rel="noopener">${escapeHtml(r.text)}</a>${deuteroNote}${cont}${en}`;
 }
 
-function renderDayInner(d, includeDate) {
+function renderDayInner(d) {
   const badge = d.fast ? '<span class="badge fast-badge">Fast</span> ' : (d.feast ? '<span class="badge feast-badge">Feast</span> ' : "");
   const title = d.title ? `<span class="tag">${escapeHtml(d.title)}</span> ` : "";
-  const date = includeDate === false ? "" : `<span class="date">${escapeHtml(d.dateLabel)}</span> `;
   const body = d.noReadings
     ? `<span class="no-readings">No readings appointed</span>`
     : d.refs.map(renderRefHtml).join(", ");
-  return `${date}${badge}${title}${body}`;
+  return `<span class="date">${escapeHtml(d.dateLabel)}</span> ${badge}${title}${body}`;
+}
+
+function renderPill(url, label, cls) {
+  return url ? `<a class="pill ${cls}" href="${url}" target="_blank" rel="noopener">${label}</a>` : "";
+}
+
+function renderPills(armUrl, enUrl) {
+  return `<span class="pills">${renderPill(armUrl, "Armenian", "arm")}${renderPill(enUrl, "English", "en")}</span>`;
+}
+
+// The card shows one reference per row with Armenian/English buttons; passages that cross a chapter
+// boundary are split into two parts because bible.com has no single link for them.
+function renderCardReading(r) {
+  if (r.unresolved) return `<div class="reading"><span class="unresolved">${escapeHtml(r.text)}</span></div>`;
+  // U+2060 word joiners stop the verse range from wrapping at the dash.
+  const ref = escapeHtml(r.text.replace(/[.\s]+$/, "")).replace(/-/g, "&#8288;&ndash;&#8288;") + (r.armDeutero ? DEUTERO_NOTE : "");
+  if (!r.armContUrl) {
+    return `<div class="reading"><div class="reading-row"><span class="ref">${ref}</span>${renderPills(r.armUrl, r.enUrl)}</div></div>`;
+  }
+  return `<div class="reading"><div class="reading-row"><span class="ref">${ref}</span></div>`
+    + `<div class="reading-part"><span class="part-label"><b>Part 1</b>${r.part1Label}</span>${renderPills(r.armUrl, r.enUrl)}</div>`
+    + `<div class="reading-part"><span class="part-label"><b>Part 2</b>${r.part2Label}</span>${renderPills(r.armContUrl, r.enContUrl)}</div></div>`;
+}
+
+function renderCardInner(d) {
+  const badge = d.fast ? '<span class="badge fast-badge">Fast</span> ' : (d.feast ? '<span class="badge feast-badge">Feast</span> ' : "");
+  const meta = (badge || d.title) ? `<div class="card-meta">${badge}${d.title ? `<span class="tag">${escapeHtml(d.title)}</span>` : ""}</div>` : "";
+  const readings = d.noReadings
+    ? `<div class="reading"><span class="no-readings">No readings appointed</span></div>`
+    : d.refs.map(renderCardReading).join("");
+  return `${meta}<div class="readings">${readings}</div>`;
 }
 
 function renderCalendarDays() {
@@ -151,7 +186,7 @@ const CALENDAR_JSON = JSON.stringify(CALENDAR_DAYS.map((d) => ({
   noReadings: d.noReadings,
   fast: d.fast,
   feast: d.feast,
-  html: renderDayInner(d, false),
+  html: renderCardInner(d),
 })));
 
 // Copy the cropped photo (left side of the Sevan peninsula panorama) into site/ so the static page
@@ -177,18 +212,31 @@ const html = `<!DOCTYPE html>
   .more-info { font-size: 0.9rem; color: #555; margin-bottom: 1.5rem; }
   .more-info summary { cursor: pointer; color: #7a1f2b; font-weight: bold; margin-bottom: 0.5rem; }
   .more-info p { margin: 0.5rem 0; }
-  #today-card { border: 2px solid #7a1f2b; background: #fff8ef; border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
+  .today-wrap { position: relative; margin: 1.6rem 0 1.5rem; }
+  .today-legend { position: absolute; top: -0.8rem; left: 50%; transform: translateX(-50%); z-index: 1; margin: 0; padding: 0 0.7rem; border: none; background: #fdfaf5; font-size: 0.95rem; font-weight: normal; font-style: italic; color: #6a5153; white-space: nowrap; }
+  @media (max-width: 360px) { .today-legend { font-size: 0.85rem; padding: 0 0.4rem; } }
+  #today-card { border: 2px solid #7a1f2b; background: #fff8ef; border-radius: 10px; padding: 1.1rem 1.2rem 1rem; }
   #today-card.feast { border-color: #c9971b; background: #fff8e2; }
   #today-card.fast { border-color: #5b7c99; background: #eef4f8; }
   .today-nav { display: flex; align-items: center; gap: 0.5rem; }
-  #today-card h2 { margin: 0 0 0.4rem; border: none; padding-bottom: 0; text-align: center; font-size: 0.95rem; font-weight: normal; color: #6a5153; }
-  .today-date { flex: 1; text-align: center; font-size: 1.1rem; font-weight: bold; color: #7a1f2b; }
+  .today-date { flex: 1; text-align: center; font-size: 1.15rem; font-weight: bold; color: #7a1f2b; }
   .nav-arrow { width: 44px; height: 44px; background: none; border: none; color: #7a1f2b; font-size: 1.3rem; line-height: 1; cursor: pointer; flex: none; padding: 0; opacity: 0.7; }
   .nav-arrow:hover:not(:disabled) { opacity: 1; }
   .nav-arrow:disabled { color: #c9b8bc; cursor: default; opacity: 0.4; }
   .back-link { display: inline-block; margin-top: 0.5rem; font-size: 0.85rem; }
-  #today-card .date { font-size: 1.4rem; }
-  #today-card .body { font-size: 1.1rem; margin-top: 0.4rem; }
+  .card-meta { margin-top: 0.3rem; text-align: center; font-size: 0.9rem; }
+  .readings { margin-top: 0.5rem; border-top: 1px solid #e8d9c4; }
+  .reading { padding: 0.65rem 0.2rem; border-bottom: 1px solid #efe3d2; }
+  .reading:last-child { border-bottom: none; padding-bottom: 0.1rem; }
+  .reading-row, .reading-part { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.4rem 0.75rem; }
+  .ref { font-size: 1.05rem; font-weight: bold; color: #222; }
+  .reading-part { margin-top: 0.45rem; padding-left: 0.6rem; border-left: 3px solid #e1c9a6; }
+  .part-label { font-size: 0.9rem; color: #555; }
+  .part-label b { color: #7a1f2b; margin-right: 0.35rem; }
+  .pills { display: flex; gap: 0.4rem; flex: none; font-family: system-ui, sans-serif; }
+  a.pill { font-size: 0.82rem; padding: 0.4rem 0.85rem; border-radius: 999px; border: 1px solid #7a1f2b; color: #7a1f2b; background: #fff; text-decoration: none; }
+  a.pill.arm { background: #7a1f2b; color: #fff; }
+  a.pill:hover { opacity: 0.85; text-decoration: none; }
   .filter-controls { display: grid; grid-template-columns: minmax(190px, 0.7fr) minmax(0, 1.3fr); gap: 0.75rem; margin-bottom: 1rem; }
   .filter-controls label { display: flex; flex-direction: column; gap: 0.3rem; color: #444; font-size: 0.9rem; font-weight: bold; }
   .filter-controls select, .filter-controls input { width: 100%; min-height: 44px; padding: 0.55rem 0.7rem; border: 2px solid #8c6a57; border-radius: 4px; background: #fff; color: #222; font: inherit; box-sizing: border-box; }
@@ -222,15 +270,17 @@ const html = `<!DOCTYPE html>
 <div class="page">
 <h1>📖 Armenian Apostolic Daily Bible Readings (2026)</h1>
 
-<div id="today-card">
-  <h2 id="today-heading">Give us this day our daily bread</h2>
-  <div class="today-nav">
-    <button id="prev-day" class="nav-arrow" type="button" aria-label="Previous day">&larr;</button>
-    <span id="today-date" class="today-date" aria-live="polite">Loading...</span>
-    <button id="next-day" class="nav-arrow" type="button" aria-label="Next day">&rarr;</button>
+<div class="today-wrap">
+  <h2 id="today-heading" class="today-legend">Give us this day our daily bread</h2>
+  <div id="today-card">
+    <div class="today-nav">
+      <button id="prev-day" class="nav-arrow" type="button" aria-label="Previous day">&larr;</button>
+      <span id="today-date" class="today-date" aria-live="polite">Loading...</span>
+      <button id="next-day" class="nav-arrow" type="button" aria-label="Next day">&rarr;</button>
+    </div>
+    <div id="today-body">Loading...</div>
+    <a href="#" id="back-to-today" class="back-link" style="display:none;">&uarr; Back to Today</a>
   </div>
-  <div id="today-body">Loading...</div>
-  <a href="#" id="back-to-today" class="back-link" style="display:none;">&uarr; Back to Today</a>
 </div>
 
 <p class="summary">Daily Scripture readings for 2026 following the Armenian Apostolic Church's liturgical calendar, compiled by AREC (Western Prelacy).</p>
