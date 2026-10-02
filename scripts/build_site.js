@@ -8,6 +8,15 @@ const path = require("path");
 const { NEW_TESTAMENT, BOOK_CODES, normalizeBookName } = require("./bible_data");
 
 const ARM_PLAN = require(path.join(__dirname, "..", "data", "armenian_2026_plan.json"));
+// Last verse of each chapter that starts or sits inside a chapter-spanning reading, per bible.com version
+// (versions differ, e.g. Matthew 15 has 39 verses in NKJV but 38 in WANTACOC).
+const LAST_VERSE = require(path.join(__dirname, "..", "data", "chapter_last_verse.json"));
+
+// Typos in the source PDFs; corrected here so they survive re-running the scraper.
+const REFERENCE_FIXES = {
+  "Mark 11:27-22:17": "Mark 11:27-12:17",
+  "2 Corinthians 6:16-17:1": "2 Corinthians 6:16-7:1",
+};
 
 // Bible versions used for links:
 //  - WARMB (Western Armenian Bible 1853): standard 39-book Old Testament, Armenian.
@@ -21,6 +30,8 @@ const ARMENIAN_OT_VERSION_ID = 1987; // WARMB
 const ARMENIAN_NT_VERSION_ID = 2325; // WANTACOC
 const ARMENIAN_DEUTERO_VERSION_ID = 2860; // ՆԷԱ Նոր Էջմիածին Աստվածաշունչ (fallback only)
 const ENGLISH_VERSION_ID = 114; // NKJV
+// bible.com links that include the version name are the form its app opens most reliably; version 2860 has none we can use.
+const VERSION_ABBR = { 114: "NKJV", 1987: "WARMB", 2325: "WANTACOC" };
 
 const NT_BOOKS = new Set(NEW_TESTAMENT.map(([name]) => name));
 const DEUTERO_BOOKS = new Set([
@@ -66,7 +77,19 @@ function parseReference(ref) {
 
 function bibleLink(versionId, code, chapter, verse, endVerse) {
   const versePart = verse ? (endVerse && endVerse !== verse ? `.${verse}-${endVerse}` : `.${verse}`) : "";
-  return `https://www.bible.com/bible/${versionId}/${code}.${chapter}${versePart}`;
+  const abbr = VERSION_ABBR[versionId] ? `.${VERSION_ABBR[versionId]}` : "";
+  return `https://www.bible.com/bible/${versionId}/${code}.${chapter}${versePart}${abbr}`;
+}
+
+const missingCounts = new Set();
+function lastVerse(versionId, code, chapter) {
+  const n = (LAST_VERSE[versionId] || {})[`${code}.${chapter}`];
+  if (!n) missingCounts.add(`${versionId}/${code}.${chapter}`);
+  return n;
+}
+
+function rangeLabel(chapter, from, to) {
+  return `${chapter}:${from}${to > from ? `&ndash;${to}` : ""}`;
 }
 
 function escapeHtml(s) {
@@ -75,10 +98,9 @@ function escapeHtml(s) {
   }[c]));
 }
 
-// Builds link info for one reference string. Same-chapter refs get one precise verse-range link. Refs
-// that cross chapters (e.g. "Luke 20:41-21:4") can't be a single bible.com link, so this produces a
-// primary link to the exact starting verse plus a "cont." link to the ending chapter's 1-through-
-// endVerse range.
+// Builds link info for one reference string as a list of parts. A same-chapter ref is one part. A ref
+// that crosses chapters (e.g. "Luke 20:41-21:4") has no single bible.com link, so it becomes one
+// verse-bounded part per chapter.
 function buildRefLinks(ref) {
   const parsed = parseReference(ref);
   if (!parsed) return { text: ref, unresolved: true };
@@ -87,22 +109,23 @@ function buildRefLinks(ref) {
   const isNt = NT_BOOKS.has(book);
   const armVersionId = isDeutero ? ARMENIAN_DEUTERO_VERSION_ID : (isNt ? ARMENIAN_NT_VERSION_ID : ARMENIAN_OT_VERSION_ID);
 
-  const makeLink = (versionId, chapter, verse, verseEnd) => bibleLink(versionId, code, chapter, verse, verseEnd);
+  const armLink = (chapter, from, to) => bibleLink(armVersionId, code, chapter, from, to);
+  const enLink = (chapter, from, to) => (isDeutero ? null : bibleLink(ENGLISH_VERSION_ID, code, chapter, from, to));
 
-  const armUrl = crossesChapters
-    ? makeLink(armVersionId, startChapter, startVerse)
-    : makeLink(armVersionId, startChapter, startVerse, endVerse);
-  const armContUrl = crossesChapters ? makeLink(armVersionId, endChapter, 1, endVerse) : null;
+  // "selections" spans (e.g. Genesis 4:1-50:26) are far too long to split chapter by chapter.
+  if (!crossesChapters || /selections/i.test(ref)) {
+    const to = crossesChapters ? undefined : endVerse;
+    return { text: ref, armDeutero: isDeutero, parts: [{ label: null, armUrl: armLink(startChapter, startVerse, to), enUrl: enLink(startChapter, startVerse, to) }] };
+  }
 
-  const enUrl = isDeutero ? null : (crossesChapters
-    ? makeLink(ENGLISH_VERSION_ID, startChapter, startVerse)
-    : makeLink(ENGLISH_VERSION_ID, startChapter, startVerse, endVerse));
-  const enContUrl = (isDeutero || !crossesChapters) ? null : makeLink(ENGLISH_VERSION_ID, endChapter, 1, endVerse);
-
-  const part1Label = crossesChapters ? `${startChapter}:${startVerse} to end of chapter` : null;
-  const part2Label = crossesChapters ? `${endChapter}:1${endVerse > 1 ? `&ndash;${endVerse}` : ""}` : null;
-
-  return { text: ref, armUrl, armContUrl, armDeutero: isDeutero, enUrl, enContUrl, part1Label, part2Label };
+  const parts = [];
+  for (let chapter = startChapter; chapter <= endChapter; chapter++) {
+    const from = chapter === startChapter ? startVerse : 1;
+    const armTo = chapter === endChapter ? endVerse : lastVerse(armVersionId, code, chapter);
+    const enTo = chapter === endChapter ? endVerse : (isDeutero ? null : lastVerse(ENGLISH_VERSION_ID, code, chapter));
+    parts.push({ label: rangeLabel(chapter, from, armTo), armUrl: armLink(chapter, from, armTo), enUrl: enLink(chapter, from, enTo) });
+  }
+  return { text: ref, armDeutero: isDeutero, parts };
 }
 
 // Precompute the full 365-day calendar (including "No Readings" days) with resolved links, used both
@@ -117,18 +140,23 @@ const CALENDAR_DAYS = ARM_PLAN.calendar.map((d) => {
     noReadings: !!d.noReadings,
     fast,
     feast,
-    refs: d.noReadings ? [] : d.references.map(buildRefLinks),
+    refs: d.noReadings ? [] : d.references.map((r) => buildRefLinks(REFERENCE_FIXES[r] || r)),
   };
 });
+
+if (missingCounts.size) {
+  throw new Error(`Missing chapter verse counts in data/chapter_last_verse.json: ${[...missingCounts].sort().join(", ")}`);
+}
 
 const DEUTERO_NOTE = ' <sup title="Not in WARMB/WANTACOC or NKJV; shown from the ՆԷԱ (New Ejmiatsin) Armenian Bible instead.">&dagger;</sup>';
 
 function renderRefHtml(r) {
   if (r.unresolved) return `<span class="unresolved">${escapeHtml(r.text)}</span>`;
   const deuteroNote = r.armDeutero ? DEUTERO_NOTE : "";
-  const cont = r.armContUrl ? ` <a class="cont-link" href="${r.armContUrl}" target="_blank" rel="noopener" title="Continue reading to the end of this passage">cont.&rarr;</a>` : "";
-  const en = r.enUrl ? ` <a class="en-link" href="${r.enUrl}" target="_blank" rel="noopener">EN</a>` : "";
-  return `<a class="arm-link" href="${r.armUrl}" target="_blank" rel="noopener">${escapeHtml(r.text)}</a>${deuteroNote}${cont}${en}`;
+  const [first, ...rest] = r.parts;
+  const cont = rest.map((p) => ` <a class="cont-link" href="${p.armUrl}" target="_blank" rel="noopener" title="Continue with ${p.label}">cont.&rarr;</a>`).join("");
+  const en = first.enUrl ? ` <a class="en-link" href="${first.enUrl}" target="_blank" rel="noopener">EN</a>` : "";
+  return `<a class="arm-link" href="${first.armUrl}" target="_blank" rel="noopener">${escapeHtml(r.text)}</a>${deuteroNote}${cont}${en}`;
 }
 
 function renderDayInner(d) {
@@ -154,12 +182,12 @@ function renderCardReading(r) {
   if (r.unresolved) return `<div class="reading"><span class="unresolved">${escapeHtml(r.text)}</span></div>`;
   // U+2060 word joiners stop the verse range from wrapping at the dash.
   const ref = escapeHtml(r.text.replace(/[.\s]+$/, "")).replace(/-/g, "&#8288;&ndash;&#8288;") + (r.armDeutero ? DEUTERO_NOTE : "");
-  if (!r.armContUrl) {
-    return `<div class="reading"><div class="reading-row"><span class="ref">${ref}</span>${renderPills(r.armUrl, r.enUrl)}</div></div>`;
+  if (r.parts.length === 1) {
+    const [only] = r.parts;
+    return `<div class="reading"><div class="reading-row"><span class="ref">${ref}</span>${renderPills(only.armUrl, only.enUrl)}</div></div>`;
   }
-  return `<div class="reading"><div class="reading-row"><span class="ref">${ref}</span></div>`
-    + `<div class="reading-part"><span class="part-label"><b>Part 1</b>${r.part1Label}</span>${renderPills(r.armUrl, r.enUrl)}</div>`
-    + `<div class="reading-part"><span class="part-label"><b>Part 2</b>${r.part2Label}</span>${renderPills(r.armContUrl, r.enContUrl)}</div></div>`;
+  const parts = r.parts.map((p, i) => `<div class="reading-part"><span class="part-label"><b>Part ${i + 1}</b>${p.label}</span>${renderPills(p.armUrl, p.enUrl)}</div>`).join("");
+  return `<div class="reading"><div class="reading-row"><span class="ref">${ref}</span></div>${parts}</div>`;
 }
 
 function renderCardInner(d) {
