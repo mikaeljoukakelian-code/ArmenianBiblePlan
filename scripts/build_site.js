@@ -181,7 +181,7 @@ const html = `<!DOCTYPE html>
   #today-card.feast { border-color: #c9971b; background: #fff8e2; }
   #today-card.fast { border-color: #5b7c99; background: #eef4f8; }
   .today-nav { display: flex; align-items: center; gap: 0.5rem; }
-  #today-card h2 { margin: 0 0 0.4rem; border: none; padding-bottom: 0; text-align: center; font-size: 1rem; color: #7a1f2b; text-transform: uppercase; letter-spacing: 0.03em; }
+  #today-card h2 { margin: 0 0 0.4rem; border: none; padding-bottom: 0; text-align: center; font-size: 0.95rem; font-weight: normal; color: #6a5153; }
   .today-date { flex: 1; text-align: center; font-size: 1.1rem; font-weight: bold; color: #7a1f2b; }
   .nav-arrow { width: 44px; height: 44px; background: none; border: none; color: #7a1f2b; font-size: 1.3rem; line-height: 1; cursor: pointer; flex: none; padding: 0; opacity: 0.7; }
   .nav-arrow:hover:not(:disabled) { opacity: 1; }
@@ -223,7 +223,7 @@ const html = `<!DOCTYPE html>
 <h1>📖 Armenian Apostolic Daily Bible Readings (2026)</h1>
 
 <div id="today-card">
-  <h2 id="today-heading">Today's Reading</h2>
+  <h2 id="today-heading">Give us this day our daily bread</h2>
   <div class="today-nav">
     <button id="prev-day" class="nav-arrow" type="button" aria-label="Previous day">&larr;</button>
     <span id="today-date" class="today-date" aria-live="polite">Loading...</span>
