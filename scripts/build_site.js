@@ -28,6 +28,7 @@ const DEUTERO_BOOKS = new Set([
 ]);
 
 const WEEKDAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 // Computes the weekday name for a Y/M/D via UTC construction (avoids local-timezone off-by-one).
 function weekdayName(year, month, day) {
@@ -186,7 +187,12 @@ const html = `<!DOCTYPE html>
   .back-link { display: inline-block; margin-top: 0.5rem; font-size: 0.85rem; }
   #today-card .date { font-size: 1.4rem; }
   #today-card .body { font-size: 1.1rem; margin-top: 0.4rem; }
-  input[type=search] { width: 100%; padding: 0.5rem; margin-bottom: 1rem; font-size: 1rem; box-sizing: border-box; }
+  .filter-controls { display: grid; grid-template-columns: minmax(190px, 0.7fr) minmax(0, 1.3fr); gap: 0.75rem; margin-bottom: 1rem; }
+  .filter-controls label { display: flex; flex-direction: column; gap: 0.3rem; color: #444; font-size: 0.9rem; font-weight: bold; }
+  .filter-controls select, .filter-controls input { width: 100%; min-height: 44px; padding: 0.55rem 0.7rem; border: 2px solid #8c6a57; border-radius: 4px; background: #fff; color: #222; font: inherit; box-sizing: border-box; }
+  .filter-controls select { border-color: #7a1f2b; cursor: pointer; }
+  .filter-controls select:focus, .filter-controls input:focus { outline: 3px solid #dfc9a8; outline-offset: 1px; }
+  @media (max-width: 540px) { .filter-controls { grid-template-columns: 1fr; gap: 0.6rem; } }
   ul.plan { list-style: none; padding: 0; margin: 0; }
   ul.plan li { padding: 0.4rem 0.5rem; border-bottom: 1px solid #e5ddd0; border-left: 4px solid transparent; }
   ul.plan li:hover { background: #f5eee0; }
@@ -233,14 +239,25 @@ const html = `<!DOCTYPE html>
   <p>Armenian links use the Western Armenian Bible (WARMB, bible.com version ${ARMENIAN_OT_VERSION_ID}) for Old Testament readings and the Western Armenian New Translation (WANTACOC, version ${ARMENIAN_NT_VERSION_ID}) for New Testament readings. English "EN" links use the NKJV (version ${ENGLISH_VERSION_ID}). A few readings cite deuterocanonical books (Tobit, Judith, Wisdom, Sirach, Baruch, 1-2 Maccabees, marked &dagger;) that aren't included in WARMB, WANTACOC, or the NKJV - those links fall back to the ՆԷԱ (New Ejmiatsin) Armenian Bible, and no English link is shown. <span class="badge feast-badge">Feast</span> and <span class="badge fast-badge">Fast</span> days are highlighted below.</p>
 </details>
 
-<input type="search" class="filter" placeholder="Search by date, feast, or book (e.g. 'January 1' or 'Isaiah')..."><ul class="plan" id="plan-list">
+<div class="filter-controls">
+  <label for="month-filter">Go to month
+    <select id="month-filter" class="month-filter">
+      <option value="all">All months</option>
+      ${MONTH_NAMES.map((month, index) => `<option value="${String(index + 1).padStart(2, "0")}">${month}</option>`).join("")}
+    </select>
+  </label>
+  <label for="text-filter">Search readings
+    <input type="search" id="text-filter" class="filter" placeholder="Type a date, feast, or book (e.g. Isaiah)...">
+  </label>
+</div>
+<ul class="plan" id="plan-list">
 ${renderCalendarDays()}
 </ul>
 </div>
 
 <script>
   var CALENDAR = ${CALENDAR_JSON};
-  var MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var MONTH_NAMES = ${JSON.stringify(MONTH_NAMES)};
 
   function todayStr() {
     var d = new Date();
@@ -299,21 +316,24 @@ ${renderCalendarDays()}
   });
 
   var input = document.querySelector('input.filter');
+  var monthSelect = document.getElementById('month-filter');
   var list = document.getElementById('plan-list');
 
-  function applyFilter(q) {
+  function applyFilter() {
+    var query = input.value.trim().toLowerCase();
+    var selectedMonth = monthSelect.value;
     list.querySelectorAll('li').forEach(function (li) {
-      li.style.display = li.textContent.toLowerCase().includes(q) ? '' : 'none';
+      var matchesMonth = selectedMonth === 'all' || li.dataset.date.slice(5, 7) === selectedMonth;
+      var matchesText = li.textContent.toLowerCase().includes(query);
+      li.style.display = matchesMonth && matchesText ? '' : 'none';
     });
   }
 
-  input.addEventListener('input', function () { applyFilter(input.value.toLowerCase()); });
+  input.addEventListener('input', applyFilter);
+  monthSelect.addEventListener('change', applyFilter);
 
-  // Default the filter to the current month so the visible list is relevant right away,
-  // instead of always starting at January 1st. Users can clear it to see the full year.
-  var currentMonthName = MONTH_NAMES[new Date().getMonth()];
-  input.value = currentMonthName;
-  applyFilter(currentMonthName.toLowerCase());
+  monthSelect.value = String(new Date().getMonth() + 1).padStart(2, '0');
+  applyFilter();
 </script>
 </body>
 </html>
