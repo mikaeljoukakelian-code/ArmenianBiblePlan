@@ -173,7 +173,7 @@ function renderPill(url, label, cls) {
 }
 
 function renderPills(armUrl, enUrl) {
-  return `<span class="pills">${renderPill(armUrl, "Armenian", "arm")}${renderPill(enUrl, "English", "en")}</span>`;
+  return `<span class="pills">${renderPill(armUrl, "Read Armenian", "arm")}${renderPill(enUrl, "English", "en")}</span>`;
 }
 
 // The card shows one reference per row with Armenian/English buttons; passages that cross a chapter
@@ -262,9 +262,10 @@ const html = `<!DOCTYPE html>
   .part-label { font-size: 0.9rem; color: #555; }
   .part-label b { color: #7a1f2b; margin-right: 0.35rem; }
   .pills { display: flex; gap: 0.4rem; flex: none; font-family: system-ui, sans-serif; }
-  a.pill { font-size: 0.82rem; padding: 0.4rem 0.85rem; border-radius: 999px; border: 1px solid #7a1f2b; color: #7a1f2b; background: #fff; text-decoration: none; }
-  a.pill.arm { background: #7a1f2b; color: #fff; }
-  a.pill:hover { opacity: 0.85; text-decoration: none; }
+  a.pill { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; box-sizing: border-box; font-size: 0.82rem; font-weight: bold; padding: 0.4rem 0.85rem; border-radius: 999px; border: 1px solid #7a1f2b; color: #7a1f2b; background: #fff; text-decoration: none; }
+  a.pill.arm { background: #7a1f2b; color: #fff; box-shadow: 0 2px 4px #7a1f2b55; }
+  a.pill:hover { opacity: 0.9; transform: translateY(-1px); text-decoration: none; }
+  a.pill:focus-visible { outline: 3px solid #dfc9a8; outline-offset: 2px; }
   .filter-controls { display: grid; grid-template-columns: minmax(190px, 0.7fr) minmax(0, 1.3fr); gap: 0.75rem; margin-bottom: 1rem; }
   .filter-controls label { display: flex; flex-direction: column; gap: 0.3rem; color: #444; font-size: 0.9rem; font-weight: bold; }
   .filter-controls select, .filter-controls input { width: 100%; min-height: 44px; padding: 0.55rem 0.7rem; border: 2px solid #8c6a57; border-radius: 4px; background: #fff; color: #222; font: inherit; box-sizing: border-box; }
@@ -284,6 +285,7 @@ const html = `<!DOCTYPE html>
   .fast-badge { background: #5b7c99; color: #fff; }
   a { color: #1a5276; text-decoration: none; }
   a:hover { text-decoration: underline; }
+  a.arm-link { color: #7a1f2b; font-weight: bold; text-decoration: underline; text-underline-offset: 2px; }
   a.en-link { font-size: 0.8rem; color: #7a1f2b; border: 1px solid #7a1f2b; border-radius: 4px; padding: 0 0.3rem; text-decoration: none; }
   a.en-link:hover { background: #7a1f2b; color: #fff; }
   a.cont-link { font-size: 0.8rem; color: #888; }
