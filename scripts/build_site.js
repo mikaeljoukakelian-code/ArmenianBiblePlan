@@ -126,13 +126,14 @@ function renderRefHtml(r) {
   return `<a class="arm-link" href="${r.armUrl}" target="_blank" rel="noopener">${escapeHtml(r.text)}</a>${deuteroNote}${cont}${en}`;
 }
 
-function renderDayInner(d) {
+function renderDayInner(d, includeDate) {
   const badge = d.fast ? '<span class="badge fast-badge">Fast</span> ' : (d.feast ? '<span class="badge feast-badge">Feast</span> ' : "");
   const title = d.title ? `<span class="tag">${escapeHtml(d.title)}</span> ` : "";
+  const date = includeDate === false ? "" : `<span class="date">${escapeHtml(d.dateLabel)}</span> `;
   const body = d.noReadings
     ? `<span class="no-readings">No readings appointed</span>`
     : d.refs.map(renderRefHtml).join(", ");
-  return `<span class="date">${escapeHtml(d.dateLabel)}</span> ${badge}${title}${body}`;
+  return `${date}${badge}${title}${body}`;
 }
 
 function renderCalendarDays() {
@@ -150,7 +151,7 @@ const CALENDAR_JSON = JSON.stringify(CALENDAR_DAYS.map((d) => ({
   noReadings: d.noReadings,
   fast: d.fast,
   feast: d.feast,
-  html: renderDayInner(d),
+  html: renderDayInner(d, false),
 })));
 
 // Copy the cropped photo (left side of the Sevan peninsula panorama) into site/ so the static page
@@ -179,9 +180,10 @@ const html = `<!DOCTYPE html>
   #today-card { border: 2px solid #7a1f2b; background: #fff8ef; border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
   #today-card.feast { border-color: #c9971b; background: #fff8e2; }
   #today-card.fast { border-color: #5b7c99; background: #eef4f8; }
-  .today-nav { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
-  #today-card h2 { margin: 0; border: none; padding-bottom: 0; font-size: 1.1rem; color: #7a1f2b; text-transform: uppercase; letter-spacing: 0.03em; }
-  .nav-arrow { background: none; border: none; color: #7a1f2b; font-size: 1.3rem; line-height: 1; cursor: pointer; flex: none; padding: 0.2rem 0.5rem; opacity: 0.7; }
+  .today-nav { display: flex; align-items: center; gap: 0.5rem; }
+  #today-card h2 { margin: 0 0 0.4rem; border: none; padding-bottom: 0; text-align: center; font-size: 1rem; color: #7a1f2b; text-transform: uppercase; letter-spacing: 0.03em; }
+  .today-date { flex: 1; text-align: center; font-size: 1.1rem; font-weight: bold; color: #7a1f2b; }
+  .nav-arrow { width: 44px; height: 44px; background: none; border: none; color: #7a1f2b; font-size: 1.3rem; line-height: 1; cursor: pointer; flex: none; padding: 0; opacity: 0.7; }
   .nav-arrow:hover:not(:disabled) { opacity: 1; }
   .nav-arrow:disabled { color: #c9b8bc; cursor: default; opacity: 0.4; }
   .back-link { display: inline-block; margin-top: 0.5rem; font-size: 0.85rem; }
@@ -221,9 +223,10 @@ const html = `<!DOCTYPE html>
 <h1>📖 Armenian Apostolic Daily Bible Readings (2026)</h1>
 
 <div id="today-card">
+  <h2 id="today-heading">Today's Reading</h2>
   <div class="today-nav">
     <button id="prev-day" class="nav-arrow" type="button" aria-label="Previous day">&larr;</button>
-    <h2 id="today-heading">Today's Reading</h2>
+    <span id="today-date" class="today-date" aria-live="polite">Loading...</span>
     <button id="next-day" class="nav-arrow" type="button" aria-label="Next day">&rarr;</button>
   </div>
   <div id="today-body">Loading...</div>
@@ -283,23 +286,22 @@ ${renderCalendarDays()}
     var entry = CALENDAR[index];
     var card = document.getElementById('today-card');
     var body = document.getElementById('today-body');
-    var heading = document.getElementById('today-heading');
+    var date = document.getElementById('today-date');
     var backLink = document.getElementById('back-to-today');
     if (!entry) {
       body.innerHTML = '<span class="unresolved">No reading found - browse the full list below.</span>';
       return;
     }
     body.innerHTML = entry.html;
+    date.textContent = entry.dateLabel;
     card.classList.toggle('feast', !!entry.feast);
     card.classList.toggle('fast', !!entry.fast);
     document.querySelectorAll('#plan-list li.is-today').forEach(function (li) { li.classList.remove('is-today'); });
     var li = document.querySelector('#plan-list li[data-date="' + entry.date + '"]');
     if (li) li.classList.add('is-today');
     if (index === todayIndex) {
-      heading.textContent = "Today's Reading";
       backLink.style.display = 'none';
     } else {
-      heading.textContent = entry.dateLabel;
       backLink.style.display = '';
     }
     document.getElementById('prev-day').disabled = index <= 0;
