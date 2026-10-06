@@ -16,8 +16,11 @@ const LAST_VERSE = require(path.join(__dirname, "..", "data", "chapter_last_vers
 const REFERENCE_FIXES = {
   "Mark 11:27-22:17": "Mark 11:27-12:17",
   "2 Corinthians 6:16-17:1": "2 Corinthians 6:16-7:1",
-  "Song of Songs 8:14-9:16": "Song of Songs 8:14",
 };
+const UNLINKABLE_REFERENCES = new Set([
+  // Preserve the source citation for review, but do not generate a Bible link to nonexistent chapter 9.
+  "Song of Songs 8:14-9:16",
+]);
 
 // Bible versions used for links:
 //  - WARMB (Western Armenian Bible 1853): standard 39-book Old Testament, Armenian.
@@ -103,6 +106,7 @@ function escapeHtml(s) {
 // that crosses chapters (e.g. "Luke 20:41-21:4") has no single bible.com link, so it becomes one
 // verse-bounded part per chapter.
 function buildRefLinks(ref) {
+  if (UNLINKABLE_REFERENCES.has(ref)) return { text: ref, unresolved: true };
   const parsed = parseReference(ref);
   if (!parsed) return { text: ref, unresolved: true };
   const { book, code, startChapter, startVerse, endChapter, endVerse, crossesChapters } = parsed;
