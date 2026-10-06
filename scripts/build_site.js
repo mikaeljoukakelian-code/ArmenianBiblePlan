@@ -16,6 +16,7 @@ const LAST_VERSE = require(path.join(__dirname, "..", "data", "chapter_last_vers
 const REFERENCE_FIXES = {
   "Mark 11:27-22:17": "Mark 11:27-12:17",
   "2 Corinthians 6:16-17:1": "2 Corinthians 6:16-7:1",
+  "Song of Songs 8:14-9:16": "Song of Songs 8:14",
 };
 
 // Bible versions used for links:
